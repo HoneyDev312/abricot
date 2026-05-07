@@ -1,3 +1,5 @@
+import styles from "./page.module.css";
+
 export default function ProjectPage() {
-  return <main>Projet</main>;
+  return <main className={styles.page}>Projet</main>;
 }

@@ -1,8 +1,5 @@
 .page {
   min-height: 100svh;
   padding: var(--space-5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--color-background);
 }
