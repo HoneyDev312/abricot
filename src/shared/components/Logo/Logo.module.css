@@ -1,0 +1,10 @@
+.logo {
+  display: inline-block;
+  width: 250px;
+  aspect-ratio: 253 / 33;
+  flex: none;
+  color: var(--color-brand-primary);
+  background-color: currentColor;
+  mask: url("./abricot-logo.svg") center / contain no-repeat;
+  -webkit-mask: url("./abricot-logo.svg") center / contain no-repeat;
+}
