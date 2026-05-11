@@ -1,5 +1,6 @@
 import { Button } from "@/shared/components/Button";
 import { Icon, type IconName } from "@/shared/components/Icons";
+import { DateInput, SelectInput, TextInput } from "@/shared/components/Input";
 import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
 import styles from "./page.module.css";
@@ -56,6 +57,18 @@ export default function Home() {
         <Link href="/" variant="disabled">
           Link
         </Link>
+      </section>
+
+      <section className={styles.inputs} aria-label="Champs disponibles">
+        <TextInput label="Label" />
+        <DateInput label="Label" />
+        <SelectInput defaultValue="" label="Label">
+          <option disabled value="">
+            Selectionner
+          </option>
+          <option value="todo">A faire</option>
+          <option value="done">Termine</option>
+        </SelectInput>
       </section>
     </main>
   );

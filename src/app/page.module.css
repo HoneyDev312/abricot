@@ -49,3 +49,10 @@
   display: grid;
   gap: var(--space-4);
 }
+
+.inputs {
+  width: min(100%, 310px);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-5);
+}
