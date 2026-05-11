@@ -1,0 +1,20 @@
+.icon {
+  flex: none;
+  color: currentColor;
+}
+
+.brand {
+  color: var(--color-brand-primary);
+}
+
+.dark {
+  color: var(--color-text-primary);
+}
+
+.light {
+  color: var(--color-text-light);
+}
+
+.neutral {
+  color: var(--color-text-secondary);
+}

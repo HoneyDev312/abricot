@@ -2,7 +2,38 @@
   min-height: 100svh;
   padding: var(--space-5);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--space-6);
   background: var(--color-background);
+}
+
+.logo {
+  color: var(--color-brand-primary);
+}
+
+.icons {
+  width: min(100%, 720px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+}
+
+.iconCard {
+  min-height: 88px;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  background: var(--color-background-light);
+}
+
+.iconCard span {
+  color: var(--color-text-secondary);
+  font-size: 12px;
 }
