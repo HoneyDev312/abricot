@@ -16,6 +16,7 @@
   --color-text-done: #27ae60;
   --color-text-inprogress: #e08d00;
   --color-text-todo: #ef4444;
+  --color-text-neutral: #9ca3af;
   --color-border-brand: var(--color-brand-primary);
   --color-border-neutral: #e5e7eb;
   --color-dark: #000000;
@@ -37,6 +38,7 @@
   --space-6: 32px;
   --space-7: 48px;
   --space-8: 64px;
+  --space-9: 80px;
 
   --container-page: 1200px;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 8%);
@@ -115,6 +117,6 @@ table {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-brand-primary);
   outline-offset: 2px;
 }

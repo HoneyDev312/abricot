@@ -37,3 +37,9 @@
   color: var(--color-text-secondary);
   font-size: 12px;
 }
+
+.buttons {
+  padding: var(--space-3);
+  display: grid;
+  gap: var(--space-3);
+}
