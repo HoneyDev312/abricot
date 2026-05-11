@@ -43,3 +43,9 @@
   display: grid;
   gap: var(--space-3);
 }
+
+.links {
+  padding: var(--space-3);
+  display: grid;
+  gap: var(--space-4);
+}

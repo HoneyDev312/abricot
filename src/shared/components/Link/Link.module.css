@@ -1,0 +1,24 @@
+.link {
+  width: fit-content;
+  display: inline-flex;
+  color: var(--color-text-brand);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.brand {
+  color: var(--color-text-brand);
+}
+
+.dark {
+  color: var(--color-text-dark);
+}
+
+.disabled {
+  color: #adb5c1;
+  cursor: not-allowed;
+}

@@ -1,5 +1,6 @@
 import { Button } from "@/shared/components/Button";
 import { Icon, type IconName } from "@/shared/components/Icons";
+import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
 import styles from "./page.module.css";
 
@@ -45,6 +46,16 @@ export default function Home() {
         <Button variant="black">Label</Button>
         <Button variant="disabled">Label</Button>
         <Button variant="outline">Label</Button>
+      </section>
+
+      <section className={styles.links} aria-label="Liens disponibles">
+        <Link href="/">Link</Link>
+        <Link href="/" variant="dark">
+          Link
+        </Link>
+        <Link href="/" variant="disabled">
+          Link
+        </Link>
       </section>
     </main>
   );
