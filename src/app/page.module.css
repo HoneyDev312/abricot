@@ -56,3 +56,10 @@
   display: grid;
   gap: var(--space-5);
 }
+
+.typography {
+  width: min(100%, 360px);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+}

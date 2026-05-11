@@ -3,6 +3,7 @@ import { Icon, type IconName } from "@/shared/components/Icons";
 import { DateInput, SelectInput, TextInput } from "@/shared/components/Input";
 import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
+import { Typography } from "@/shared/components/Typography";
 import styles from "./page.module.css";
 
 const iconNames: IconName[] = [
@@ -69,6 +70,22 @@ export default function Home() {
           <option value="todo">A faire</option>
           <option value="done">Termine</option>
         </SelectInput>
+      </section>
+
+      <section className={styles.typography} aria-label="Textes disponibles">
+        <Typography as="h1" variant="h1">
+          Heading Manrope
+        </Typography>
+        <Typography as="h4" variant="h4">
+          Title Inter brand
+        </Typography>
+        <Typography>small text Inter regular</Typography>
+        <Typography color="secondary" variant="label">
+          Label
+        </Typography>
+        <Typography color="neutral" variant="link">
+          link
+        </Typography>
       </section>
     </main>
   );

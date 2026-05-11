@@ -12,7 +12,7 @@
   --color-text-secondary: #6b7280;
   --color-text-brand: var(--color-brand-primary);
   --color-text-light: #ffffff;
-  --color-text-dark: #0f0f0f;
+  --color-text-dark: #1f1f1f;
   --color-text-done: #27ae60;
   --color-text-inprogress: #e08d00;
   --color-text-todo: #ef4444;
@@ -21,6 +21,15 @@
   --color-border-neutral: #e5e7eb;
   --color-dark: #000000;
   --color-light: #ffffff;
+  --color-background: var(--color-background-main);
+  --color-text: var(--color-text-primary);
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-xxl: 40px;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -62,7 +71,7 @@ body {
   overflow-x: hidden;
   color: var(--color-text);
   background: var(--color-background);
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

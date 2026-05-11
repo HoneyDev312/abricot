@@ -1,0 +1,86 @@
+.typography {
+  margin: 0;
+}
+
+.main {
+  font-family: var(--font-main);
+}
+
+.accent {
+  font-family: var(--font-accent);
+}
+
+.h1 {
+  font-size: var(--text-xxl);
+  line-height: 100%;
+  color: var(--color-text-brand);
+  font-weight: 700;
+}
+
+.h4 {
+  font-size: var(--text-xl);
+  line-height: 100%;
+  color: var(--color-text-dark);
+  font-weight: 600;
+}
+
+.label {
+  font-size: var(--text-sm);
+  line-height: 100%;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.small {
+  font-size: var(--text-sm);
+  line-height: 100%;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.link {
+  font-size: var(--text-sm);
+  line-height: 100%;
+  color: var(--color-text-brand);
+  font-weight: 400;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.primary {
+  color: var(--color-text-primary);
+}
+
+.secondary {
+  color: var(--color-text-secondary);
+}
+
+.neutral {
+  color: var(--color-text-neutral);
+}
+
+.brand {
+  color: var(--color-text-brand);
+}
+
+.dark {
+  color: var(--color-text-dark);
+}
+
+.light {
+  color: var(--color-text-light);
+}
