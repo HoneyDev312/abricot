@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { LoginForm } from "@/features/auth/components/LoginForm";
+import { redirectIfAuthenticated } from "@/features/auth/services/session.service";
 import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
 import { Typography } from "@/shared/components/Typography";
 import styles from "./page.module.css";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  await redirectIfAuthenticated();
+
   return (
     <main className={styles.page}>
       <section className={styles.panel} aria-label="Connexion">

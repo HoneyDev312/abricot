@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 // Nom du cookie qui stocke le JWT côté navigateur.
 const AUTH_COOKIE_NAME = "abricot_token";
@@ -9,6 +10,26 @@ const AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 // Lecture du token depuis les Server Components, Server Actions ou Route Handlers.
 export async function getAuthToken() {
   return (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+}
+
+// Protège une page privée : sans token, l'utilisateur retourne au login.
+export async function requireAuth() {
+  const token = await getAuthToken();
+
+  if (!token) {
+    redirect("/login");
+  }
+
+  return token;
+}
+
+// Empêche un utilisateur connecté de revoir les pages login/register.
+export async function redirectIfAuthenticated() {
+  const token = await getAuthToken();
+
+  if (token) {
+    redirect("/dashboard");
+  }
 }
 
 // Stockage du token dans un cookie httpOnly pour éviter l'accès depuis JavaScript.
