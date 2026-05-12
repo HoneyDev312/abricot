@@ -1,16 +1,10 @@
 .typography {
   margin: 0;
-}
-
-.main {
   font-family: var(--font-main);
 }
 
-.accent {
-  font-family: var(--font-accent);
-}
-
 .h1 {
+  font-family: var(--font-accent);
   font-size: var(--text-xxl);
   line-height: 100%;
   color: var(--color-text-brand);

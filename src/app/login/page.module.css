@@ -1,5 +1,107 @@
 .page {
   min-height: 100svh;
   padding: var(--space-5);
-  background: var(--color-background);
+  display: grid;
+  place-items: center;
+  background: var(--color-background-main);
+}
+
+.panel {
+  width: min(100%, 1440px);
+  min-height: min(100svh - 48px, 1024px);
+  display: grid;
+  grid-template-columns: minmax(360px, 38%) 1fr;
+  overflow: hidden;
+  background: var(--color-background-light);
+}
+
+.formColumn {
+  min-height: 100%;
+  padding: var(--space-10) 0px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--color-background-light);
+  justify-content: center;
+}
+
+.logo {
+  width: 230px;
+}
+
+.form {
+  width: 100%;
+  max-width: 260px;
+  align-self: center;
+  display: grid;
+}
+
+.title {
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.submit {
+  justify-self: center;
+  margin-bottom: var(--space-4);
+}
+
+.forgotLink {
+  justify-self: center;
+}
+
+.registerText {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.registerLink {
+  display: inline-flex;
+}
+
+.imageColumn {
+  position: relative;
+  min-height: 100%;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 60% center;
+}
+
+@media (max-width: 1024px) {
+  .formColumn {
+    padding: var(--space-9) 0px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 0;
+  }
+
+  .panel {
+    min-height: 100svh;
+    grid-template-columns: 1fr;
+  }
+
+  .formColumn {
+    min-height: 100svh;
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .logo {
+    width: 190px;
+  }
+
+  .imageColumn {
+    display: none;
+  }
 }
