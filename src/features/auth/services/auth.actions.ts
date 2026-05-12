@@ -1,0 +1,39 @@
+"use server";
+
+import { redirect } from "next/navigation";
+import { login } from "./auth.service";
+import { setAuthToken } from "./session.service";
+
+// Etat renvoyé au composant client après tentative de connexion.
+export type LoginActionState = {
+  error?: string;
+};
+
+// Server Action appelée directement par le formulaire de connexion.
+export async function loginAction(
+  _state: LoginActionState,
+  formData: FormData
+): Promise<LoginActionState> {
+  // FormData vient des champs HTML qui portent les noms `email` et `password`.
+  const email = String(formData.get("email") ?? "");
+  const password = String(formData.get("password") ?? "");
+
+  try {
+    // Si le backend valide les identifiants, il renvoie un JWT.
+    const { token } = await login({ email, password });
+
+    // Le JWT est placé dans un cookie sécurisé côté serveur.
+    await setAuthToken(token);
+  } catch (error) {
+    // En cas d'erreur, on retourne un état lisible par le formulaire client.
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Impossible de se connecter pour le moment",
+    };
+  }
+
+  // redirect doit rester hors du try/catch car Next lève une exception interne.
+  redirect("/dashboard");
+}

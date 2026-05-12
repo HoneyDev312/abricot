@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/shared/components/Button";
-import { TextInput } from "@/shared/components/Input";
+import { LoginForm } from "@/features/auth/components/LoginForm";
 import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
 import { Typography } from "@/shared/components/Typography";
@@ -13,28 +12,7 @@ export default function SignInPage() {
         <div className={styles.formColumn}>
           <Logo className={styles.logo} />
 
-          <form className={styles.form}>
-            <Typography as="h1" className={styles.title} variant="h1">
-              Connexion
-            </Typography>
-
-            <div className={styles.fields}>
-              <TextInput autoComplete="email" label="Email" type="email" />
-              <TextInput
-                autoComplete="current-password"
-                label="Mot de passe"
-                type="password"
-              />
-            </div>
-
-            <Button className={styles.submit} type="submit">
-              Se connecter
-            </Button>
-
-            <Link className={styles.forgotLink} href="/">
-              Mot de passe oublié?
-            </Link>
-          </form>
+          <LoginForm />
 
           <Typography variant="small" className={styles.registerText}>
             <span>Pas encore de compte ?</span>
