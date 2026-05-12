@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { login } from "./auth.service";
-import { setAuthToken } from "./session.service";
+import { clearAuthToken, setAuthToken } from "./session.service";
 
 // Etat renvoyé au composant client après tentative de connexion.
 export type LoginActionState = {
@@ -36,4 +36,10 @@ export async function loginAction(
 
   // redirect doit rester hors du try/catch car Next lève une exception interne.
   redirect("/dashboard");
+}
+
+// Server Action appelée par le bouton de déconnexion.
+export async function logoutAction() {
+  await clearAuthToken();
+  redirect("/login");
 }
