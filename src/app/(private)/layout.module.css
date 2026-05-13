@@ -5,7 +5,6 @@
   background: var(--color-background);
 }
 
-.header,
 .footer {
   min-height: 64px;
   padding: 0 var(--space-5);
@@ -25,19 +24,9 @@
   font-size: 12px;
 }
 
-.logo {
-  width: 120px;
-}
-
 .footerLogo {
   width: 82px;
   color: var(--color-text-dark);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
 }
 
 .content {
@@ -45,16 +34,9 @@
 }
 
 @media (max-width: 720px) {
-  .header,
   .footer {
     padding: var(--space-4);
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .nav {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-3);
   }
 }
