@@ -12,7 +12,16 @@
 }
 
 .h4 {
+  font-family: var(--font-accent);
   font-size: var(--text-xl);
+  line-height: 100%;
+  color: var(--color-text-dark);
+  font-weight: 600;
+}
+
+.h5 {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
   line-height: 100%;
   color: var(--color-text-dark);
   font-weight: 600;
@@ -30,6 +39,13 @@
   line-height: 100%;
   font-weight: 400;
   color: var(--color-text);
+}
+
+.medium {
+  font-size: var(--text-md);
+  line-height: 100%;
+  font-weight: 400;
+  color: var(--color-text-secondary);
 }
 
 .navLink {

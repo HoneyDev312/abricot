@@ -9,7 +9,15 @@ type TypographyColor =
   | "primary"
   | "secondary";
 type TypographyFamily = "main" | "accent";
-type TypographyVariant = "h1" | "h4" | "navLink" | "link" | "label" | "small";
+type TypographyVariant =
+  | "h1"
+  | "h4"
+  | "h5"
+  | "navLink"
+  | "link"
+  | "label"
+  | "small"
+  | "medium";
 type TypographyWeight = "bold" | "medium" | "regular" | "semibold";
 
 type TypographyProps = {
