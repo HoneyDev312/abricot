@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
 import { TextInput } from "@/shared/components/Input";
@@ -34,6 +35,8 @@ export function ConfirmProfileUpdateModal({
   pendingUpdate,
 }: ConfirmProfileUpdateModalProps) {
   const router = useRouter();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const isNotEmpty = currentPassword.trim().length >= 5;
 
   async function handleConfirmAction(
     previousState: Awaited<UpdateProfileActionState>,
@@ -75,11 +78,7 @@ export function ConfirmProfileUpdateModal({
 
         <input name="currentEmail" type="hidden" value={currentEmail} />
         <input name="email" type="hidden" value={pendingUpdate.email} />
-        <input
-          name="firstname"
-          type="hidden"
-          value={pendingUpdate.firstname}
-        />
+        <input name="firstname" type="hidden" value={pendingUpdate.firstname} />
         <input name="name" type="hidden" value={pendingUpdate.name} />
         <input
           name="newPassword"
@@ -90,9 +89,12 @@ export function ConfirmProfileUpdateModal({
         <TextInput
           autoComplete="current-password"
           label="Mot de passe actuel"
+          minLength={5}
           name="currentPassword"
+          onChange={(event) => setCurrentPassword(event.target.value)}
           required
           type="password"
+          value={currentPassword}
         />
 
         {state.error ? (
@@ -101,7 +103,12 @@ export function ConfirmProfileUpdateModal({
           </Typography>
         ) : null}
 
-        <Button className={styles.submit} disabled={isPending} type="submit">
+        <Button
+          className={styles.submit}
+          disabled={!isNotEmpty || isPending}
+          variant={!isNotEmpty || isPending ? "disabled" : "dark"}
+          type="submit"
+        >
           {isPending ? "Modification..." : "Confirmer"}
         </Button>
       </form>

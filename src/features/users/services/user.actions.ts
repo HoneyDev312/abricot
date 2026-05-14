@@ -21,16 +21,20 @@ export async function updateProfileAction(
   const newPassword = String(formData.get("newPassword") ?? "");
 
   try {
-    // Le backend ne demande pas le mot de passe actuel pour modifier le profil.
-    // On force donc cette vérification côté Server Action avant toute mise à jour.
-    await login({ email: currentEmail, password: currentPassword });
-
-    await updateUserProfile({ email, firstname, name });
-
-    // Le changement de mot de passe reste optionnel : champ vide = profil seul.
+    // Le changement de mot de passe possède déjà sa propre vérification backend
+    // du mot de passe actuel. On le fait passer en premier pour remonter ses
+    // erreurs spécifiques, notamment les contraintes de format.
     if (newPassword) {
       await updateUserPassword({ currentPassword, newPassword });
     }
+
+    // Le backend ne demande pas le mot de passe actuel pour modifier le profil.
+    // On force donc cette vérification côté Server Action avant toute mise à jour.
+    if (!newPassword) {
+      await login({ email: currentEmail, password: currentPassword });
+    }
+
+    await updateUserProfile({ email, firstname, name });
   } catch (error) {
     return {
       error:
