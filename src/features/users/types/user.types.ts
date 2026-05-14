@@ -11,3 +11,17 @@ export type UserProfile = {
 export type UserProfileResponse = {
   user: UserProfile;
 };
+
+export type UpdateUserProfilePayload = {
+  email: string;
+  name: string;
+};
+
+export type UpdateUserProfileResponse = {
+  user: UserProfile;
+};
+
+export type UpdateUserPasswordPayload = {
+  currentPassword: string;
+  newPassword: string;
+};

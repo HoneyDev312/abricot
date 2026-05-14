@@ -1,5 +1,11 @@
 import { apiClient } from "@/shared/lib/api-client";
-import type { UserProfile, UserProfileResponse } from "../types/user.types";
+import type {
+  UpdateUserPasswordPayload,
+  UpdateUserProfilePayload,
+  UpdateUserProfileResponse,
+  UserProfile,
+  UserProfileResponse,
+} from "../types/user.types";
 
 // Service métier utilisateur : il connaît les routes backend liées au profil.
 export async function getUserProfile(): Promise<UserProfile> {
@@ -8,4 +14,19 @@ export async function getUserProfile(): Promise<UserProfile> {
   });
 
   return user;
+}
+
+export async function updateUserProfile(
+  payload: UpdateUserProfilePayload
+): Promise<UserProfile> {
+  const { user } = await apiClient.put<UpdateUserProfileResponse>(
+    "/auth/profile",
+    payload
+  );
+
+  return user;
+}
+
+export function updateUserPassword(payload: UpdateUserPasswordPayload) {
+  return apiClient.put<void>("/auth/password", payload);
 }

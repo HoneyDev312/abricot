@@ -31,7 +31,25 @@
 }
 
 .modalTitle {
+  margin-bottom: var(--space-3);
   color: var(--color-text-dark);
+}
+
+.confirmForm {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.error {
+  color: var(--color-text-todo);
+}
+
+.confirmSubmit {
+  width: fit-content;
+  height: 42px;
+  margin-top: var(--space-2);
+  padding: 0 var(--space-5);
+  font-size: var(--text-sm);
 }
 
 @media (max-width: 720px) {
@@ -39,7 +57,8 @@
     padding: var(--space-5);
   }
 
-  .submit {
+  .submit,
+  .confirmSubmit {
     width: 100%;
     max-width: none;
   }
