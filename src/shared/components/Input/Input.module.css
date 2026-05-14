@@ -22,7 +22,12 @@
 }
 
 .control::placeholder {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
   color: var(--color-text-neutral);
+  font-size: 28px;
+  letter-spacing: -3px;
 }
 
 .iconControl {

@@ -5,6 +5,7 @@ import type { ApiResponse } from "@/shared/types/api.types";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 type RequestOptions = Omit<RequestInit, "body"> & {
+  auth?: boolean;
   body?: unknown;
   token?: string;
 };
@@ -24,8 +25,10 @@ export class ApiError extends Error {
 
 async function request<T>(
   endpoint: string,
-  { body, headers, token, ...options }: RequestOptions = {}
+  { auth = true, body, headers, token, ...options }: RequestOptions = {}
 ): Promise<T> {
+  const authToken = token ?? (auth ? await getSessionToken() : undefined);
+
   // Tous les appels backend passent par ce wrapper pour centraliser les headers,
   // la sérialisation JSON et la gestion des erreurs.
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -33,7 +36,7 @@ async function request<T>(
     body: body ? JSON.stringify(body) : undefined,
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       ...headers,
     },
   });
@@ -51,6 +54,20 @@ async function request<T>(
   }
 
   return payload.data as T;
+}
+
+// Charge le service de session uniquement côté serveur : il utilise `next/headers`,
+// qui ne peut pas être importé dans le bundle navigateur.
+async function getSessionToken() {
+  if (typeof window !== "undefined") {
+    return undefined;
+  }
+
+  const { getAuthToken } = await import(
+    "@/features/auth/services/session.service"
+  );
+
+  return getAuthToken();
 }
 
 // API minimale pour les méthodes HTTP dont on aura besoin dans les services métier.
