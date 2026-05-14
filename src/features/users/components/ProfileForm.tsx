@@ -1,55 +1,27 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useActionState, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/shared/components/Button";
 import { TextInput } from "@/shared/components/Input";
-import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { useUserProfile } from "../hooks/useUserProfile";
-import { updateProfileAction } from "../services/user.actions";
 import type { UserProfile } from "../types/user.types";
+import {
+  ConfirmProfileUpdateModal,
+  type PendingProfileUpdate,
+} from "./ConfirmProfileUpdateModal";
 import styles from "./ProfileForm.module.css";
 
 type ProfileFormProps = {
   profile: UserProfile;
 };
 
-type PendingProfileUpdate = {
-  email: string;
-  name: string;
-  newPassword: string;
-};
-
 export function ProfileForm({ profile }: ProfileFormProps) {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingUpdate, setPendingUpdate] =
     useState<PendingProfileUpdate | null>(null);
   const user = useUserProfile(profile);
-
-  // La confirmation vit dans la modale : si l'action réussit, on ferme la modale
-  // et on rafraîchit les Server Components pour afficher le profil à jour.
-  async function handleConfirmAction(
-    previousState: Awaited<ReturnType<typeof updateProfileAction>>,
-    formData: FormData
-  ) {
-    const result = await updateProfileAction(previousState, formData);
-
-    if (result.success) {
-      setIsModalOpen(false);
-      setPendingUpdate(null);
-      router.refresh();
-    }
-
-    return result;
-  }
-
-  const [state, formAction, isPending] = useActionState(
-    handleConfirmAction,
-    {}
-  );
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -66,6 +38,11 @@ export function ProfileForm({ profile }: ProfileFormProps) {
       newPassword: String(formData.get("newPassword") ?? ""),
     });
     setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+    setPendingUpdate(null);
   }
 
   return (
@@ -118,51 +95,15 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         </Button>
       </form>
 
-      <Modal
-        isOpen={isModalOpen}
-        label="Modification du compte"
-        onClose={() => setIsModalOpen(false)}
-      >
-        <form action={formAction} className={styles.confirmForm}>
-          <Typography as="h4" className={styles.modalTitle} variant="h4">
-            Confirmer la modification
-          </Typography>
-          <Typography color="secondary" variant="small">
-            Saisissez votre mot de passe actuel pour valider les changements.
-          </Typography>
-
-          <input name="currentEmail" type="hidden" value={profile.email} />
-          <input name="email" type="hidden" value={pendingUpdate?.email ?? ""} />
-          <input name="name" type="hidden" value={pendingUpdate?.name ?? ""} />
-          <input
-            name="newPassword"
-            type="hidden"
-            value={pendingUpdate?.newPassword ?? ""}
-          />
-
-          <TextInput
-            autoComplete="current-password"
-            label="Mot de passe actuel"
-            name="currentPassword"
-            required
-            type="password"
-          />
-
-          {state.error ? (
-            <Typography className={styles.error} variant="small">
-              {state.error}
-            </Typography>
-          ) : null}
-
-          <Button
-            className={styles.confirmSubmit}
-            disabled={isPending}
-            type="submit"
-          >
-            {isPending ? "Modification..." : "Confirmer"}
-          </Button>
-        </form>
-      </Modal>
+      {pendingUpdate ? (
+        <ConfirmProfileUpdateModal
+          currentEmail={profile.email}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onSuccess={closeModal}
+          pendingUpdate={pendingUpdate}
+        />
+      ) : null}
     </section>
   );
 }

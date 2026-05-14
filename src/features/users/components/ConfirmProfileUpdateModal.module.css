@@ -1,0 +1,28 @@
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.title {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-dark);
+}
+
+.error {
+  color: var(--color-text-todo);
+}
+
+.submit {
+  width: fit-content;
+  height: 42px;
+  margin-top: var(--space-2);
+  padding: 0 var(--space-5);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 720px) {
+  .submit {
+    width: 100%;
+    max-width: none;
+  }
+}
