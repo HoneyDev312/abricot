@@ -30,6 +30,10 @@
   font-size: var(--text-sm);
 }
 
+.modalTitle {
+  color: var(--color-text-dark);
+}
+
 @media (max-width: 720px) {
   .card {
     padding: var(--space-5);

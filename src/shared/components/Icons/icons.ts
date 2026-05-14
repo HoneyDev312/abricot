@@ -4,6 +4,7 @@ import { arrowDownIcon } from "./svg/arrowDown";
 import { arrowTopIcon } from "./svg/arrowTop";
 import { calendarIcon } from "./svg/calendar";
 import { commentIcon } from "./svg/comment";
+import { crossIcon } from "./svg/cross";
 import { folderIcon } from "./svg/folder";
 import { menuIcon } from "./svg/menu";
 import { mosaicIcon } from "./svg/mosaic";
@@ -24,6 +25,7 @@ const iconDefinitions = {
   arrowTop: arrowTopIcon,
   calendar: calendarIcon,
   comment: commentIcon,
+  cross: crossIcon,
   folder: folderIcon,
   menu: menuIcon,
   mosaic: mosaicIcon,

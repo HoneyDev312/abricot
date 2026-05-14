@@ -1,7 +1,10 @@
 "use client";
 
+import type { FormEvent } from "react";
+import { useState } from "react";
 import { Button } from "@/shared/components/Button";
 import { TextInput } from "@/shared/components/Input";
+import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { useUserProfile } from "../hooks/useUserProfile";
 import type { UserProfile } from "../types/user.types";
@@ -12,7 +15,13 @@ type ProfileFormProps = {
 };
 
 export function ProfileForm({ profile }: ProfileFormProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useUserProfile(profile);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsModalOpen(true);
+  }
 
   return (
     <section className={styles.card}>
@@ -30,7 +39,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         </Typography>
       </header>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <TextInput id="lastName" label="Nom" defaultValue={user.lastName} />
         <TextInput
           id="firstName"
@@ -50,8 +59,20 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           placeholder="••••••••••"
         />
 
-        <Button className={styles.submit}>Modifier les informations</Button>
+        <Button className={styles.submit} type="submit">
+          Modifier les informations
+        </Button>
       </form>
+
+      <Modal
+        isOpen={isModalOpen}
+        label="Modification du compte"
+        onClose={() => setIsModalOpen(false)}
+      >
+        <Typography as="h4" className={styles.modalTitle} variant="h4">
+          Modal de test
+        </Typography>
+      </Modal>
     </section>
   );
 }

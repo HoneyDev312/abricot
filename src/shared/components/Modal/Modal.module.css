@@ -1,0 +1,55 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: var(--space-5);
+  display: grid;
+  place-items: center;
+  background: rgb(0 0 0 / 42%);
+}
+
+.dialog {
+  position: relative;
+  width: min(100%, 520px);
+  min-height: 220px;
+  padding: var(--space-7);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  background: var(--color-background-light);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 18%);
+}
+
+.content {
+  min-height: 100%;
+}
+
+.close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background-light);
+  color: var(--color-text-dark);
+  font-size: var(--text-sm);
+  line-height: 1;
+}
+
+.close:hover {
+  border-color: var(--color-border-brand);
+  color: var(--color-text-brand);
+}
+
+@media (max-width: 720px) {
+  .overlay {
+    padding: var(--space-4);
+  }
+
+  .dialog {
+    min-height: 180px;
+    padding: var(--space-6);
+  }
+}
