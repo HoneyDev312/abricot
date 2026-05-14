@@ -16,6 +16,7 @@ export async function updateProfileAction(
   const currentEmail = String(formData.get("currentEmail") ?? "");
   const currentPassword = String(formData.get("currentPassword") ?? "");
   const email = String(formData.get("email") ?? "");
+  const firstname = String(formData.get("firstname") ?? "");
   const name = String(formData.get("name") ?? "");
   const newPassword = String(formData.get("newPassword") ?? "");
 
@@ -24,7 +25,7 @@ export async function updateProfileAction(
     // On force donc cette vérification côté Server Action avant toute mise à jour.
     await login({ email: currentEmail, password: currentPassword });
 
-    await updateUserProfile({ email, name });
+    await updateUserProfile({ email, firstname, name });
 
     // Le changement de mot de passe reste optionnel : champ vide = profil seul.
     if (newPassword) {

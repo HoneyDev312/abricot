@@ -75,6 +75,11 @@ export function ConfirmProfileUpdateModal({
 
         <input name="currentEmail" type="hidden" value={currentEmail} />
         <input name="email" type="hidden" value={pendingUpdate.email} />
+        <input
+          name="firstname"
+          type="hidden"
+          value={pendingUpdate.firstname}
+        />
         <input name="name" type="hidden" value={pendingUpdate.name} />
         <input
           name="newPassword"

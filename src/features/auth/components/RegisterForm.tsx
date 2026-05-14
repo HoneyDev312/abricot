@@ -25,6 +25,13 @@ export function RegisterForm() {
           type="text"
         />
         <TextInput
+          autoComplete="firstname"
+          label="Prénom"
+          name="firstname"
+          required
+          type="text"
+        />
+        <TextInput
           autoComplete="email"
           label="Email"
           name="email"

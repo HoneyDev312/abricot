@@ -2,6 +2,7 @@
 export type UserProfile = {
   createdAt?: string;
   email: string;
+  firstname?: string | null;
   id: string;
   name?: string | null;
   updatedAt?: string;
@@ -14,6 +15,7 @@ export type UserProfileResponse = {
 
 export type UpdateUserProfilePayload = {
   email: string;
+  firstname: string;
   name: string;
 };
 
@@ -28,6 +30,7 @@ export type UpdateUserPasswordPayload = {
 
 export type PendingProfileValues = {
   email: string;
+  firstname: string;
   name: string;
   newPassword: string;
 };

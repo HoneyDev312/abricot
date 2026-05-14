@@ -52,12 +52,13 @@ export async function registerAction(
   _state: RegisterActionState,
   formData: FormData
 ): Promise<RegisterActionState> {
-  const name = String(formData.get("name") ?? "");
+  const name = String(formData.get("name") ?? "").trim();
+  const firstname = String(formData.get("firstname") ?? "").trim();
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
   try {
-    const { token } = await register({ email, name, password });
+    const { token } = await register({ email, firstname, name, password });
 
     await setAuthToken(token);
   } catch (error) {

@@ -8,12 +8,11 @@ export function getPendingProfileValues(
   form: HTMLFormElement,
 ): PendingProfileValues {
   const formData = new FormData(form);
-  const firstName = getStringFormValue(formData, "firstName");
-  const lastName = getStringFormValue(formData, "lastName");
 
   return {
     email: getStringFormValue(formData, "email"),
-    name: [firstName, lastName].filter(Boolean).join(" "),
+    firstname: getStringFormValue(formData, "firstname"),
+    name: getStringFormValue(formData, "name"),
     newPassword: getStringFormValue(formData, "newPassword"),
   };
 }
@@ -24,6 +23,7 @@ export function isPendingProfileValuesChanged(
 ) {
   return (
     currentValues.email !== initialValues.email ||
+    currentValues.firstname !== initialValues.firstname ||
     currentValues.name !== initialValues.name ||
     currentValues.newPassword !== initialValues.newPassword
   );

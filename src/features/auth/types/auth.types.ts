@@ -2,6 +2,7 @@
 export type AuthUser = {
   createdAt?: string;
   email: string;
+  firstname?: string | null;
   id: string;
   name?: string | null;
 };
@@ -15,6 +16,7 @@ export type LoginPayload = {
 // Données envoyées au backend pour POST /auth/register.
 export type RegisterPayload = {
   email: string;
+  firstname: string;
   name: string;
   password: string;
 };

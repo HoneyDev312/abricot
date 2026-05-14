@@ -34,7 +34,8 @@ export function ProfileForm({ profile }: ProfileFormProps) {
   const user = useUserProfile(profile);
   const initialValues: PendingProfileValues = {
     email: user.email,
-    name: [user.firstName, user.lastName].filter(Boolean).join(" "),
+    firstname: user.firstName,
+    name: user.lastName,
     newPassword: "",
   };
 
@@ -95,13 +96,13 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         <TextInput
           id="lastName"
           label="Nom"
-          name="lastName"
+          name="name"
           defaultValue={user.lastName}
         />
         <TextInput
           id="firstName"
           label="Prénom"
-          name="firstName"
+          name="firstname"
           defaultValue={user.firstName}
         />
         <TextInput
