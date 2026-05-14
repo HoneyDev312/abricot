@@ -6,43 +6,53 @@ import { Button } from "@/shared/components/Button";
 import { TextInput } from "@/shared/components/Input";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
-import { updateProfileAction } from "../services/user.actions";
+import {
+  updateProfileAction,
+  UpdateProfileActionState,
+} from "../services/user.actions";
+import type {
+  PendingProfileValues,
+  ProfileUpdateFeedback,
+} from "../types/user.types";
 import styles from "./ConfirmProfileUpdateModal.module.css";
-
-export type PendingProfileUpdate = {
-  email: string;
-  name: string;
-  newPassword: string;
-};
 
 type ConfirmProfileUpdateModalProps = {
   currentEmail: string;
   isOpen: boolean;
   onClose: () => void;
+  onResult: (feedback: ProfileUpdateFeedback) => void;
   onSuccess: () => void;
-  pendingUpdate: PendingProfileUpdate;
+  pendingUpdate: PendingProfileValues;
 };
 
 export function ConfirmProfileUpdateModal({
   currentEmail,
   isOpen,
   onClose,
+  onResult,
   onSuccess,
   pendingUpdate,
 }: ConfirmProfileUpdateModalProps) {
   const router = useRouter();
 
-  // Si l'action réussit, la modale prévient le parent puis rafraîchit la page
-  // pour récupérer le profil mis à jour depuis les Server Components.
   async function handleConfirmAction(
-    previousState: Awaited<ReturnType<typeof updateProfileAction>>,
-    formData: FormData
+    previousState: Awaited<UpdateProfileActionState>,
+    formData: FormData,
   ) {
     const result = await updateProfileAction(previousState, formData);
 
     if (result.success) {
+      onResult({
+        message: "Profil mis à jour avec succès.",
+        type: "success",
+      });
       onSuccess();
       router.refresh();
+    } else if (result.error) {
+      onResult({
+        message: result.error,
+        type: "error",
+      });
     }
 
     return result;
@@ -50,7 +60,7 @@ export function ConfirmProfileUpdateModal({
 
   const [state, formAction, isPending] = useActionState(
     handleConfirmAction,
-    {}
+    {},
   );
 
   return (

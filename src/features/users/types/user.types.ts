@@ -25,3 +25,14 @@ export type UpdateUserPasswordPayload = {
   currentPassword: string;
   newPassword: string;
 };
+
+export type PendingProfileValues = {
+  email: string;
+  name: string;
+  newPassword: string;
+};
+
+export type ProfileUpdateFeedback = {
+  message: string;
+  type: "error" | "success";
+};

@@ -1,16 +1,22 @@
 "use client";
 
-import type { FormEvent } from "react";
+import type { ChangeEvent, SyntheticEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/shared/components/Button";
 import { TextInput } from "@/shared/components/Input";
 import { Typography } from "@/shared/components/Typography";
 import { useUserProfile } from "../hooks/useUserProfile";
-import type { UserProfile } from "../types/user.types";
 import {
-  ConfirmProfileUpdateModal,
-  type PendingProfileUpdate,
-} from "./ConfirmProfileUpdateModal";
+  getPendingProfileValues,
+  isPendingProfileValuesChanged,
+} from "../services/user.helpers";
+import type {
+  PendingProfileValues,
+  ProfileUpdateFeedback as ProfileUpdateFeedbackType,
+  UserProfile,
+} from "../types/user.types";
+import { ConfirmProfileUpdateModal } from "./ConfirmProfileUpdateModal";
+import { ProfileUpdateFeedback } from "./ProfileUpdateFeedback";
 import styles from "./ProfileForm.module.css";
 
 type ProfileFormProps = {
@@ -19,30 +25,48 @@ type ProfileFormProps = {
 
 export function ProfileForm({ profile }: ProfileFormProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingUpdate, setPendingUpdate] =
-    useState<PendingProfileUpdate | null>(null);
+    useState<PendingProfileValues | null>(null);
+  const [feedback, setFeedback] = useState<ProfileUpdateFeedbackType | null>(
+    null,
+  );
   const user = useUserProfile(profile);
+  const initialValues: PendingProfileValues = {
+    email: user.email,
+    name: [user.firstName, user.lastName].filter(Boolean).join(" "),
+    newPassword: "",
+  };
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // Premier submit : on capture les nouvelles valeurs sans les envoyer encore.
-    // Elles seront confirmées avec le mot de passe actuel dans la modale.
-    const formData = new FormData(event.currentTarget);
-    const firstName = String(formData.get("firstName") ?? "").trim();
-    const lastName = String(formData.get("lastName") ?? "").trim();
+    if (!hasUnsavedChanges) {
+      return;
+    }
 
-    setPendingUpdate({
-      email: String(formData.get("email") ?? ""),
-      name: [firstName, lastName].filter(Boolean).join(" "),
-      newPassword: String(formData.get("newPassword") ?? ""),
-    });
+    setFeedback(null);
+    setPendingUpdate(getPendingProfileValues(event.currentTarget));
     setIsModalOpen(true);
+  }
+
+  function handleChange(event: ChangeEvent<HTMLFormElement>) {
+    setHasUnsavedChanges(
+      isPendingProfileValuesChanged(
+        getPendingProfileValues(event.currentTarget),
+        initialValues,
+      ),
+    );
   }
 
   function closeModal() {
     setIsModalOpen(false);
     setPendingUpdate(null);
+  }
+
+  function handleSuccess() {
+    closeModal();
+    setHasUnsavedChanges(false);
   }
 
   return (
@@ -61,7 +85,13 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         </Typography>
       </header>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <ProfileUpdateFeedback feedback={feedback} />
+
+      <form
+        className={styles.form}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      >
         <TextInput
           id="lastName"
           label="Nom"
@@ -90,7 +120,12 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           placeholder="••••••••••"
         />
 
-        <Button className={styles.submit} type="submit">
+        <Button
+          className={styles.submit}
+          disabled={!hasUnsavedChanges}
+          variant={!hasUnsavedChanges ? "disabled" : "dark"}
+          type="submit"
+        >
           Modifier les informations
         </Button>
       </form>
@@ -100,7 +135,8 @@ export function ProfileForm({ profile }: ProfileFormProps) {
           currentEmail={profile.email}
           isOpen={isModalOpen}
           onClose={closeModal}
-          onSuccess={closeModal}
+          onResult={setFeedback}
+          onSuccess={handleSuccess}
           pendingUpdate={pendingUpdate}
         />
       ) : null}

@@ -1,0 +1,15 @@
+.feedback {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+.success {
+  background: var(--color-background-done);
+  color: var(--color-text-done);
+}
+
+.error {
+  background: var(--color-background-todo);
+  color: var(--color-text-todo);
+}
