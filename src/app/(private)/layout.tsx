@@ -13,7 +13,7 @@ export default async function PrivateLayout({
   await requireAuth();
 
   return (
-    <div className={styles.shell}>
+    <div className={styles.wrapper}>
       <PrivateHeader />
 
       <div className={styles.content}>{children}</div>

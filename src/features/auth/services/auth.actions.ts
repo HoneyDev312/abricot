@@ -1,11 +1,15 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { login } from "./auth.service";
+import { login, register } from "./auth.service";
 import { clearAuthToken, setAuthToken } from "./session.service";
 
 // Etat renvoyé au composant client après tentative de connexion.
 export type LoginActionState = {
+  error?: string;
+};
+
+export type RegisterActionState = {
   error?: string;
 };
 
@@ -42,4 +46,28 @@ export async function loginAction(
 export async function logoutAction() {
   await clearAuthToken();
   redirect("/login");
+}
+
+export async function registerAction(
+  _state: RegisterActionState,
+  formData: FormData
+): Promise<RegisterActionState> {
+  const name = String(formData.get("name") ?? "");
+  const email = String(formData.get("email") ?? "");
+  const password = String(formData.get("password") ?? "");
+
+  try {
+    const { token } = await register({ email, name, password });
+
+    await setAuthToken(token);
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Impossible de créer le compte pour le moment",
+    };
+  }
+
+  redirect("/dashboard");
 }

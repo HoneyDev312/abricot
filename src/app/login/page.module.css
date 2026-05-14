@@ -1,31 +1,14 @@
-.page {
-  min-height: 100svh;
-  padding: var(--space-5);
-  display: grid;
-  place-items: center;
-  background: var(--color-background-main);
-}
-
-.panel {
-  width: min(100%, 1440px);
-  min-height: min(100svh - 48px, 1024px);
-  display: grid;
-  grid-template-columns: minmax(360px, 38%) 1fr;
-  overflow: hidden;
-  background: var(--color-background-light);
-}
-
 .formColumn {
   min-height: 100%;
   padding: var(--space-10) 0px;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: var(--color-background-light);
+  background: var(--color-background-main);
   justify-content: center;
 }
 
 .logo {
-  width: 230px;
+  justify-self: center;
 }
 
 .registerText {

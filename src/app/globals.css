@@ -21,8 +21,6 @@
   --color-border-neutral: #e5e7eb;
   --color-dark: #000000;
   --color-light: #ffffff;
-  --color-background: var(--color-background-main);
-  --color-text: var(--color-text-primary);
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -70,12 +68,19 @@ body {
   min-height: 100vh;
   max-width: 100vw;
   overflow-x: hidden;
-  color: var(--color-text);
-  background: var(--color-background);
-  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-background-light);
+  font-family: var(--font-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  align-content: center;
+  justify-content: center;
+}
+
+main {
+  display: grid;
+  place-items: center;
 }
 
 button,

@@ -3,6 +3,7 @@ import { LoginForm } from "@/features/auth/components/LoginForm";
 import { redirectIfAuthenticated } from "@/features/auth/services/session.service";
 import { Link } from "@/shared/components/Link";
 import { Logo } from "@/shared/components/Logo";
+import { PageSection } from "@/shared/components/PageSection";
 import { Typography } from "@/shared/components/Typography";
 import styles from "./page.module.css";
 
@@ -10,8 +11,8 @@ export default async function SignInPage() {
   await redirectIfAuthenticated();
 
   return (
-    <main className={styles.page}>
-      <section className={styles.panel} aria-label="Connexion">
+    <main>
+      <PageSection label="Connexion" unlogged={true}>
         <div className={styles.formColumn}>
           <Logo className={styles.logo} />
 
@@ -35,7 +36,7 @@ export default async function SignInPage() {
             src="/images/signin.jpg"
           />
         </div>
-      </section>
+      </PageSection>
     </main>
   );
 }

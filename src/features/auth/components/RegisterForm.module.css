@@ -1,0 +1,28 @@
+.form {
+  width: 280px;
+  align-self: center;
+  display: grid;
+}
+
+.title {
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.error {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-todo);
+  text-align: center;
+}
+
+.submit {
+  width: 100%;
+  justify-self: center;
+  margin-bottom: var(--space-4);
+}

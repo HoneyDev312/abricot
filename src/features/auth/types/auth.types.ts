@@ -12,8 +12,18 @@ export type LoginPayload = {
   password: string;
 };
 
+// Données envoyées au backend pour POST /auth/register.
+export type RegisterPayload = {
+  email: string;
+  name: string;
+  password: string;
+};
+
 // Données reçues après une connexion réussie.
 export type LoginResponse = {
   token: string;
   user: AuthUser;
 };
+
+// Données reçues après une inscription réussie.
+export type RegisterResponse = LoginResponse;

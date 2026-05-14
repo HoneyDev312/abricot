@@ -1,0 +1,12 @@
+.pageSection {
+  width: min(100%, 1440px);
+  min-height: min(100svh, 1080px);
+  overflow: hidden;
+  margin-top: var(--space-8);
+}
+
+.unlogged {
+  display: grid;
+  grid-template-columns: minmax(360px, 38%) 1fr;
+  margin-top: 0;
+}
