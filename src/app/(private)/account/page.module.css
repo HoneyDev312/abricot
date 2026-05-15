@@ -2,7 +2,7 @@
   display: flex;
   width: min(100%, 1040px);
   justify-content: flex-end;
-  margin: 0 auto var(--space-4);
+  margin: var(--space-8) auto var(--space-4);
 }
 
 @media (max-width: 720px) {

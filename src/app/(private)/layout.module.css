@@ -1,8 +1,10 @@
 .wrapper {
-  min-height: 100svh;
+  width: min(100%, 1440px);
+  min-height: min(100svh, 1080px);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: var(--color-background);
+  margin: 0 auto;
+  border: 1px solid var(--color-border-brand);
 }
 
 .footer {
@@ -22,6 +24,7 @@
 
 .content {
   min-width: 0;
+  background: var(--color-background-main);
 }
 
 @media (max-width: 720px) {

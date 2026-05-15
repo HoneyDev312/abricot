@@ -7,6 +7,7 @@
   --color-background-inprogress: #fff0d7;
   --color-background-todo: #ffe0e0;
   --color-brand-primary: #d3590b;
+  --color-brand-opacity: #d3590b8c;
   --color-brand-secondary: #ffe8d9;
   --color-text-primary: #000000;
   --color-text-secondary: #6b7280;
@@ -45,7 +46,6 @@
   --space-9: 80px;
   --space-10: 96px;
 
-  --container-page: 1200px;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 8%);
 }
 
@@ -69,7 +69,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   color: var(--color-text-primary);
-  background: var(--color-background-light);
+  background: var(--color-brand-opacity);
   font-family: var(--font-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;

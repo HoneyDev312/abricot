@@ -17,7 +17,8 @@ type TypographyVariant =
   | "link"
   | "label"
   | "small"
-  | "medium";
+  | "medium"
+  | "large";
 type TypographyWeight = "bold" | "medium" | "regular" | "semibold";
 
 type TypographyProps = {

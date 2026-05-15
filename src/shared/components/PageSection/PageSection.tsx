@@ -3,25 +3,13 @@ import Styles from "./PageSection.module.css";
 
 type PageSectionProps = {
   children: ReactNode;
-  className?: string;
   label: string;
   unlogged?: boolean;
 };
 
-export function PageSection({
-  children,
-  label,
-  unlogged = false,
-}: PageSectionProps) {
-  const pageSectionClassName = [
-    Styles.pageSection,
-    unlogged ? Styles.unlogged : undefined,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
+export function PageSection({ children, label }: PageSectionProps) {
   return (
-    <section aria-label={label} className={pageSectionClassName}>
+    <section aria-label={label} className={Styles.pageSection}>
       {children}
     </section>
   );

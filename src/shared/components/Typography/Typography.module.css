@@ -47,6 +47,12 @@
   color: var(--color-text-secondary);
 }
 
+.large {
+  font-size: var(--text-lg);
+  line-height: 100%;
+  font-weight: 400;
+}
+
 .navLink {
   font-size: var(--text-md);
   line-height: 100%;
