@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { requireAuth } from "@/features/auth/services/session.service";
+import { getUserInitials } from "@/features/users/services/user.helpers";
+import { getUserProfile } from "@/features/users/services/user.service";
 import { Logo } from "@/shared/components/Logo";
 import { Typography } from "@/shared/components/Typography";
 import { PrivateHeader } from "./components/PrivateHeader";
@@ -11,10 +13,12 @@ export default async function PrivateLayout({
   children: ReactNode;
 }>) {
   await requireAuth();
+  const profile = await getUserProfile();
+  const userInitials = getUserInitials(profile);
 
   return (
     <div className={styles.wrapper}>
-      <PrivateHeader />
+      <PrivateHeader userInitials={userInitials} />
 
       <div className={styles.content}>{children}</div>
 

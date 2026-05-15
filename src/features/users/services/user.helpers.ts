@@ -1,4 +1,4 @@
-import type { PendingProfileValues } from "../types/user.types";
+import type { PendingProfileValues, UserProfile } from "../types/user.types";
 
 function getStringFormValue(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
@@ -27,4 +27,25 @@ export function isPendingProfileValuesChanged(
     currentValues.name !== initialValues.name ||
     currentValues.newPassword !== initialValues.newPassword
   );
+}
+
+export function getDisplayName({
+  email,
+  firstname,
+  name,
+}: Pick<UserProfile, "email" | "firstname" | "name">) {
+  return [firstname, name].filter(Boolean).join(" ") || email;
+}
+
+export function getUserInitials({
+  email,
+  firstname,
+  name,
+}: Pick<UserProfile, "email" | "firstname" | "name">) {
+  const initials = [firstname, name]
+    .filter(Boolean)
+    .map((part) => part?.trim().charAt(0).toUpperCase())
+    .join("");
+
+  return initials || email.trim().charAt(0).toUpperCase();
 }

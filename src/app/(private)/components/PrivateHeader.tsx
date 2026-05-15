@@ -26,11 +26,15 @@ const navLinks: NavLink[] = [
   },
 ];
 
+type PrivateHeaderProps = {
+  userInitials: string;
+};
+
 function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function PrivateHeader() {
+export function PrivateHeader({ userInitials }: PrivateHeaderProps) {
   const pathname = usePathname();
   const isAccountActive = pathname.startsWith("/account");
 
@@ -82,7 +86,7 @@ export function PrivateHeader() {
           }
           href="/account"
         >
-          <Typography variant="navLink">AD</Typography>
+          <Typography variant="navLink">{userInitials}</Typography>
         </NextLink>
       </div>
     </header>
