@@ -1,3 +1,4 @@
+import { DashboardTabs } from "@/features/dashboard/components/DashboardTabs";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { getUserProfile } from "@/features/users/services/user.service";
 import { Button } from "@/shared/components/Button";
@@ -24,6 +25,8 @@ export default async function DashboardPage() {
           + Créer un projet
         </Button>
       </div>
+
+      <DashboardTabs />
     </main>
   );
 }
