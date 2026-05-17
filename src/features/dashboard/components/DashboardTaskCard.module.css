@@ -10,18 +10,29 @@
   background: var(--color-background-light);
 }
 
+.cardKanban {
+  padding: var(--space-5);
+  display: grid;
+  align-items: start;
+  justify-content: stretch;
+  gap: var(--space-5);
+}
+
 .content {
   display: grid;
   gap: var(--space-5);
 }
 
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
 .heading {
   display: grid;
   gap: var(--space-2);
-}
-
-.title {
-  color: var(--color-text-dark);
 }
 
 .meta {
@@ -36,6 +47,11 @@
   gap: var(--space-2);
 }
 
+.metaSeparator {
+  border: 1px solid var(--color-border-dark);
+  height: 100%;
+}
+
 .actions {
   min-width: 140px;
   display: grid;
@@ -43,34 +59,16 @@
   gap: var(--space-5);
 }
 
-.status {
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-rounded);
-  font-family: var(--font-main);
-  font-size: var(--text-sm);
-  line-height: 1;
-}
-
-.statusTodo {
-  background: var(--color-background-todo);
-  color: var(--color-text-todo);
-}
-
-.statusInProgress {
-  background: var(--color-background-inprogress);
-  color: var(--color-text-inprogress);
-}
-
-.statusDone {
-  background: var(--color-background-done);
-  color: var(--color-text-done);
-}
-
 .viewButton {
   width: 120px;
   height: 50px;
   padding: 0 var(--space-5);
   font-size: var(--text-sm);
+}
+
+.cardKanban .actions {
+  min-width: 0;
+  justify-items: start;
 }
 
 @media (max-width: 720px) {

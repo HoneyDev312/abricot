@@ -1,49 +1,40 @@
 import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
-import type { TaskStatus } from "@/features/tasks/types/task.types";
+import {
+  DashboardTaskStatus,
+  type DashboardTaskStatusValue,
+} from "./DashboardTaskStatus";
 import styles from "./DashboardTaskCard.module.css";
 
-type DashboardTaskCardStatus = Extract<
-  TaskStatus,
-  "DONE" | "IN_PROGRESS" | "TODO"
->;
-
 type DashboardTaskCardProps = {
-  status?: DashboardTaskCardStatus;
+  status?: DashboardTaskStatusValue;
+  variant?: "kanban" | "list";
 };
 
-const statusConfig: Record<
-  DashboardTaskCardStatus,
-  { className: string; label: string }
-> = {
-  DONE: {
-    className: styles.statusDone,
-    label: "Terminée",
-  },
-  IN_PROGRESS: {
-    className: styles.statusInProgress,
-    label: "En cours",
-  },
-  TODO: {
-    className: styles.statusTodo,
-    label: "À faire",
-  },
-};
-
-export function DashboardTaskCard({ status = "TODO" }: DashboardTaskCardProps) {
-  const currentStatus = statusConfig[status];
+export function DashboardTaskCard({
+  status = "TODO",
+  variant = "list",
+}: DashboardTaskCardProps) {
+  const cardClassName =
+    variant === "kanban" ? `${styles.card} ${styles.cardKanban}` : styles.card;
 
   return (
-    <article className={styles.card}>
+    <article className={cardClassName}>
       <div className={styles.content}>
-        <div className={styles.heading}>
-          <Typography as="h5" variant="h5" weight="bold">
-            Nom de la tâche
-          </Typography>
-          <Typography color="secondary" variant="small">
-            Description de la tâche
-          </Typography>
+        <div className={styles.header}>
+          <div className={styles.heading}>
+            <Typography as="h5" variant="h5" weight="bold">
+              Nom de la tâche
+            </Typography>
+            <Typography color="secondary" variant="small">
+              Description de la tâche
+            </Typography>
+          </div>
+
+          {variant === "kanban" ? (
+            <DashboardTaskStatus status={status} />
+          ) : null}
         </div>
 
         <ul className={styles.meta} aria-label="Informations de la tâche">
@@ -53,12 +44,14 @@ export function DashboardTaskCard({ status = "TODO" }: DashboardTaskCardProps) {
               Nom du projet
             </Typography>
           </li>
+          <li className={styles.metaSeparator} />
           <li className={styles.metaItem}>
             <Icon color="neutral" name="calendar" size="14px" />
             <Typography color="secondary" variant="small">
               9 mars
             </Typography>
           </li>
+          <li className={styles.metaSeparator} />
           <li className={styles.metaItem}>
             <Icon color="neutral" name="comment" size="14px" />
             <Typography color="secondary" variant="small">
@@ -69,9 +62,7 @@ export function DashboardTaskCard({ status = "TODO" }: DashboardTaskCardProps) {
       </div>
 
       <div className={styles.actions}>
-        <span className={`${styles.status} ${currentStatus.className}`}>
-          {currentStatus.label}
-        </span>
+        {variant === "list" ? <DashboardTaskStatus status={status} /> : null}
         <Button className={styles.viewButton} type="button">
           Voir
         </Button>

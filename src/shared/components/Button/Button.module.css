@@ -28,7 +28,7 @@
 }
 
 .black {
-  background: var(--color-dark);
+  background: var(--color-background-dark);
   color: var(--color-text-light);
 }
 
