@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Icon, type IconName } from "@/shared/components/Icons";
+import { DashboardKanbanContainer } from "./DashboardKanbanContainer";
 import { DashboardListContainer } from "./DashboardListContainer";
 import styles from "./DashboardTabs.module.css";
 
@@ -58,6 +59,7 @@ export function DashboardTabs() {
       </div>
 
       {activeTab === "list" ? <DashboardListContainer /> : null}
+      {activeTab === "kanban" ? <DashboardKanbanContainer /> : null}
     </>
   );
 }
