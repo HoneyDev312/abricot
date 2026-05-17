@@ -1,5 +1,6 @@
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
+import { DashboardTaskCard } from "./DashboardTaskCard";
 import styles from "./DashboardListContainer.module.css";
 
 export function DashboardListContainer() {
@@ -32,6 +33,10 @@ export function DashboardListContainer() {
           />
         </label>
       </header>
+
+      <div className={styles.tasks}>
+        <DashboardTaskCard />
+      </div>
     </section>
   );
 }

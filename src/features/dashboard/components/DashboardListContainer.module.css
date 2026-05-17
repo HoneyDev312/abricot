@@ -62,8 +62,14 @@
   pointer-events: none;
 }
 
+.tasks {
+  margin-top: var(--space-7);
+  display: grid;
+  gap: var(--space-5);
+}
+
 @media (max-width: 720px) {
-  .panel {
+  .container {
     width: calc(100% - var(--space-4) * 2);
     margin: var(--space-5) var(--space-4) 0;
     padding: var(--space-5);
