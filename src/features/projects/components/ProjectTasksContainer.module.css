@@ -1,0 +1,148 @@
+.container {
+  width: calc(100% - var(--space-10) * 2);
+  min-height: 760px;
+  margin: 0 var(--space-10) var(--space-9);
+  padding: var(--space-7) var(--space-8);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  background: var(--color-background-light);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tab {
+  min-height: 42px;
+  padding: 0 var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--color-background-light);
+  color: var(--color-text-brand);
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  line-height: 1;
+}
+
+.tabActive {
+  background: var(--color-brand-secondary);
+}
+
+.status,
+.search {
+  position: relative;
+}
+
+.status {
+  width: 150px;
+}
+
+.search {
+  width: 300px;
+}
+
+.hiddenLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.statusSelect,
+.searchInput {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  background: var(--color-background-light);
+  color: var(--color-text-secondary);
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  outline: none;
+}
+
+.statusSelect {
+  padding: 0 48px 0 var(--space-5);
+  appearance: none;
+}
+
+.searchInput {
+  padding: 0 52px 0 var(--space-5);
+}
+
+.statusSelect:focus,
+.searchInput:focus {
+  border-color: var(--color-border-brand);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-neutral);
+}
+
+.statusIcon,
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.statusIcon {
+  right: var(--space-5);
+}
+
+.searchIcon {
+  right: var(--space-5);
+}
+
+@media (max-width: 1024px) {
+  .header,
+  .controls {
+    display: grid;
+  }
+
+  .controls,
+  .search {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: calc(100% - var(--space-4) * 2);
+    min-height: 480px;
+    margin: 0 var(--space-4) var(--space-6);
+    padding: var(--space-5);
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+}

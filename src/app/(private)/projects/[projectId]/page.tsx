@@ -1,5 +1,6 @@
 import { ProjectContributors } from "@/features/projects/components/ProjectContributors";
 import { ProjectDetailsHeader } from "@/features/projects/components/ProjectDetailsHeader";
+import { ProjectTasksContainer } from "@/features/projects/components/ProjectTasksContainer";
 import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
 import styles from "./page.module.css";
 
@@ -20,6 +21,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         title={project.name}
       />
       <ProjectContributors members={project.members} owner={project.owner} />
+      <ProjectTasksContainer />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 .contributors {
   width: calc(100% - var(--space-10) * 2);
   min-height: 70px;
-  margin: 0 var(--space-10) var(--space-8);
+  margin: 0 var(--space-10) var(--space-6);
   padding: 0 var(--space-7);
   display: flex;
   align-items: center;
