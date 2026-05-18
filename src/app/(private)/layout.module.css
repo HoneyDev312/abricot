@@ -1,6 +1,6 @@
 .wrapper {
   width: min(100%, 1440px);
-  min-height: min(100svh, 1080px);
+  min-height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   margin: 0 auto;
