@@ -30,6 +30,12 @@
   width: 300px;
 }
 
+.tasks {
+  margin-top: var(--space-7);
+  display: grid;
+  gap: var(--space-5);
+}
+
 .status {
   width: 150px;
 }

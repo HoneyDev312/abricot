@@ -5,6 +5,8 @@ import { SearchInput } from "@/shared/components/SearchInput";
 import { SelectFilter } from "@/shared/components/SelectFilter";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
+import type { Task } from "@/features/tasks/types/task.types";
+import { ProjectTaskCard } from "./ProjectTaskCard";
 import styles from "./ProjectTasksContainer.module.css";
 
 type ProjectTaskTabId = "calendar" | "list";
@@ -22,7 +24,11 @@ const projectTaskTabs: TabItem<ProjectTaskTabId>[] = [
   },
 ];
 
-export function ProjectTasksContainer() {
+type ProjectTasksContainerProps = {
+  tasks: Task[];
+};
+
+export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
   const [activeTab, setActiveTab] = useState<ProjectTaskTabId>("list");
 
   return (
@@ -65,6 +71,12 @@ export function ProjectTasksContainer() {
           />
         </div>
       </header>
+
+      <div className={styles.tasks}>
+        {tasks.map((task) => (
+          <ProjectTaskCard key={task.id} task={task} />
+        ))}
+      </div>
     </section>
   );
 }

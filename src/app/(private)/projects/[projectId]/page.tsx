@@ -2,6 +2,7 @@ import { ProjectContributors } from "@/features/projects/components/ProjectContr
 import { ProjectDetailsHeader } from "@/features/projects/components/ProjectDetailsHeader";
 import { ProjectTasksContainer } from "@/features/projects/components/ProjectTasksContainer";
 import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
+import { getProjectTasks } from "@/features/projects/services/project.service";
 import styles from "./page.module.css";
 
 type ProjectPageProps = {
@@ -13,6 +14,7 @@ type ProjectPageProps = {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { projectId } = await params;
   const project = await getProjectOrNotFound(projectId);
+  const tasks = await getProjectTasks(projectId);
 
   return (
     <main className={styles.page}>
@@ -21,7 +23,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         title={project.name}
       />
       <ProjectContributors members={project.members} owner={project.owner} />
-      <ProjectTasksContainer />
+      <ProjectTasksContainer tasks={tasks} />
     </main>
   );
 }
