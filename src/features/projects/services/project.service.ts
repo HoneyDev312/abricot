@@ -4,7 +4,9 @@ import type {
   Project,
   ProjectDetails,
   ProjectResponse,
+  ProjectUser,
   ProjectsResponse,
+  UsersSearchResponse,
 } from "../types/project.types";
 
 export async function getProjects(): Promise<Project[]> {
@@ -29,4 +31,22 @@ export async function getProjectTasks(projectId: string): Promise<Task[]> {
   });
 
   return data.tasks;
+}
+
+export async function searchUsers(query = ""): Promise<ProjectUser[]> {
+  const searchParams = new URLSearchParams();
+
+  if (query) {
+    searchParams.set("query", query);
+  }
+
+  const endpoint = searchParams.size
+    ? `/users/search?${searchParams.toString()}`
+    : "/users/search";
+
+  const data = await apiClient.get<UsersSearchResponse>(endpoint, {
+    cache: "no-store",
+  });
+
+  return data.users;
 }

@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import { Button } from "@/shared/components/Button";
+import type { ProjectUser } from "../types/project.types";
 import { CreateProjectModal } from "./CreateProjectModal";
 import styles from "./CreateProjectButton.module.css";
 
-export function CreateProjectButton() {
+type CreateProjectButtonProps = {
+  contributors: ProjectUser[];
+};
+
+export function CreateProjectButton({ contributors }: CreateProjectButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,7 +23,11 @@ export function CreateProjectButton() {
         Créer un projet
       </Button>
 
-      <CreateProjectModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <CreateProjectModal
+        contributors={contributors}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
     </>
   );
 }

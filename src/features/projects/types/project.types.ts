@@ -54,3 +54,7 @@ export type ProjectResponse = {
 export type ProjectsResponse = {
   projects: Project[];
 };
+
+export type UsersSearchResponse = {
+  users: ProjectUser[];
+};

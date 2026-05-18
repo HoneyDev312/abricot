@@ -1,15 +1,21 @@
 import { CreateProjectButton } from "@/features/projects/components/CreateProjectButton";
 import { ProjectsGrid } from "@/features/projects/components/ProjectsGrid";
-import { getProjects } from "@/features/projects/services/project.service";
+import {
+  getProjects,
+  searchUsers,
+} from "@/features/projects/services/project.service";
 import { PageHeader } from "../components/PageHeader";
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const [projects, contributors] = await Promise.all([
+    getProjects(),
+    searchUsers(),
+  ]);
 
   return (
     <main>
       <PageHeader
-        action={<CreateProjectButton />}
+        action={<CreateProjectButton contributors={contributors} />}
         description="Gérez vos projets"
         title="Mes projets"
       />

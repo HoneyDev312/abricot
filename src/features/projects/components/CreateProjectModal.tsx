@@ -4,14 +4,18 @@ import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
+import { getDisplayName } from "@/features/users/services/user.helpers";
+import type { ProjectUser } from "../types/project.types";
 import styles from "./CreateProjectModal.module.css";
 
 type CreateProjectModalProps = {
+  contributors: ProjectUser[];
   isOpen: boolean;
   onClose: () => void;
 };
 
 export function CreateProjectModal({
+  contributors,
   isOpen,
   onClose,
 }: CreateProjectModalProps) {
@@ -60,6 +64,11 @@ export function CreateProjectModal({
                 name="contributors"
               >
                 <option value="">Choisir un ou plusieurs collaborateurs</option>
+                {contributors.map((contributor) => (
+                  <option key={contributor.id} value={contributor.id}>
+                    {getDisplayName(contributor)}
+                  </option>
+                ))}
               </select>
               <Icon
                 className={styles.selectIcon}
