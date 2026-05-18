@@ -1,5 +1,5 @@
 import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
-import { PageHeader } from "../../components/PageHeader";
+import { ProjectDetailsHeader } from "@/features/projects/components/ProjectDetailsHeader";
 import styles from "./page.module.css";
 
 type ProjectPageProps = {
@@ -14,8 +14,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className={styles.page}>
-      <PageHeader
-        actionLabel="+ Créer une tâche"
+      <ProjectDetailsHeader
         description={project.description || "Aucune description"}
         title={project.name}
       />

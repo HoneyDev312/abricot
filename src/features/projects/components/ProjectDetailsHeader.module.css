@@ -1,0 +1,131 @@
+.header {
+  width: 100%;
+  margin: var(--space-4) 0 var(--space-8);
+  padding: 0 var(--space-10);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.left {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.backLink {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  background: var(--color-background-light);
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  font-size: var(--text-lg);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  border-color: var(--color-border-brand);
+  color: var(--color-text-brand);
+}
+
+.backLink:focus-visible,
+.editButton:focus-visible,
+.createTaskButton:focus-visible,
+.aiButton:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
+}
+
+.heading {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.editButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-brand);
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  line-height: 1;
+  text-decoration: underline;
+}
+
+.actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.createTaskButton,
+.aiButton {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  line-height: 1;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+
+.createTaskButton:hover,
+.aiButton:hover {
+  opacity: 0.86;
+}
+
+.createTaskButton {
+  padding: 0 var(--space-5);
+  background: var(--color-background-dark);
+  color: var(--color-text-light);
+}
+
+.aiButton {
+  min-width: 80px;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  background: var(--color-brand-primary);
+  color: var(--color-text-light);
+}
+
+@media (max-width: 720px) {
+  .header {
+    padding: 0 var(--space-4);
+    display: grid;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .createTaskButton {
+    flex: 1;
+  }
+}
