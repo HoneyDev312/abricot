@@ -1,5 +1,6 @@
 import { DashboardTabs } from "@/features/dashboard/components/DashboardTabs";
 import { getAssignedTasks } from "@/features/dashboard/services/dashboard.service";
+import { CreateProjectButton } from "@/features/projects/components/CreateProjectButton";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { getUserProfile } from "@/features/users/services/user.service";
 import { PageHeader } from "../components/PageHeader";
@@ -14,7 +15,7 @@ export default async function DashboardPage() {
   return (
     <main>
       <PageHeader
-        actionLabel="+ Créer un projet"
+        action={<CreateProjectButton />}
         description={`Bonjour ${displayName}, voici un aperçu de vos projets et tâches`}
         title="Tableau de bord"
       />

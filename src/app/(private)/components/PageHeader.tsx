@@ -1,18 +1,14 @@
-import { Button } from "@/shared/components/Button";
+import type { ReactNode } from "react";
 import { Typography } from "@/shared/components/Typography";
 import styles from "./PageHeader.module.css";
 
 type PageHeaderProps = {
-  actionLabel: string;
+  action?: ReactNode;
   description: string;
   title: string;
 };
 
-export function PageHeader({
-  actionLabel,
-  description,
-  title,
-}: PageHeaderProps) {
+export function PageHeader({ action, description, title }: PageHeaderProps) {
   return (
     <div className={styles.header}>
       <div className={styles.heading}>
@@ -22,9 +18,7 @@ export function PageHeader({
         <Typography variant="large">{description}</Typography>
       </div>
 
-      <Button className={styles.actionButton} type="button">
-        {actionLabel}
-      </Button>
+      {action ?? null}
     </div>
   );
 }
