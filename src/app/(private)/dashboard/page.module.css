@@ -1,33 +1,5 @@
-.header {
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-5);
-  margin: var(--space-9) 0 var(--space-8);
-  padding: 0 var(--space-10);
-}
-
-.heading {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.createButton {
-  padding: 0 var(--space-5);
-}
-
 @media (max-width: 720px) {
   .page {
     padding: var(--space-6) var(--space-4);
-  }
-
-  .header {
-    display: grid;
-  }
-
-  .createButton {
-    width: 100%;
-    max-width: none;
   }
 }
