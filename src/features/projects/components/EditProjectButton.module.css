@@ -1,0 +1,16 @@
+.editButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-brand);
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  line-height: 1;
+  text-decoration: underline;
+}
+
+.editButton:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
+}

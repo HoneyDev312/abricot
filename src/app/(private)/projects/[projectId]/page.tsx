@@ -20,6 +20,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <main className={styles.page}>
       <ProjectDetailsHeader
         description={project.description || "Aucune description"}
+        project={project}
         title={project.name}
       />
       <ProjectContributors members={project.members} owner={project.owner} />

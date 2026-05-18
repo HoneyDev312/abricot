@@ -65,6 +65,11 @@ export type CreateProjectResponse = {
   project: Project;
 };
 
+export type UpdateProjectPayload = {
+  description: string;
+  name: string;
+};
+
 export type UsersSearchResponse = {
   users: ProjectUser[];
 };

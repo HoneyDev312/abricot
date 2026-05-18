@@ -8,6 +8,7 @@ import type {
   ProjectResponse,
   ProjectUser,
   ProjectsResponse,
+  UpdateProjectPayload,
   UsersSearchResponse,
 } from "../types/project.types";
 
@@ -31,6 +32,18 @@ export async function getProject(projectId: string): Promise<ProjectDetails> {
   const data = await apiClient.get<ProjectResponse>(`/projects/${projectId}`, {
     cache: "no-store",
   });
+
+  return data.project;
+}
+
+export async function updateProject(
+  projectId: string,
+  payload: UpdateProjectPayload,
+): Promise<Project> {
+  const data = await apiClient.put<ProjectResponse>(
+    `/projects/${projectId}`,
+    payload,
+  );
 
   return data.project;
 }

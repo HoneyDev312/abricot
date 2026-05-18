@@ -1,15 +1,19 @@
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import Link from "next/link";
+import type { ProjectDetails } from "../types/project.types";
+import { EditProjectButton } from "./EditProjectButton";
 import styles from "./ProjectDetailsHeader.module.css";
 
 type ProjectDetailsHeaderProps = {
   description: string;
+  project: ProjectDetails;
   title: string;
 };
 
 export function ProjectDetailsHeader({
   description,
+  project,
   title,
 }: ProjectDetailsHeaderProps) {
   return (
@@ -28,9 +32,7 @@ export function ProjectDetailsHeader({
             <Typography as="h4" variant="h4">
               {title}
             </Typography>
-            <button className={styles.editButton} type="button">
-              Modifier
-            </button>
+            <EditProjectButton project={project} />
           </div>
 
           <Typography color="secondary" variant="large">
