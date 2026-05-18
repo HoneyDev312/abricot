@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   getDisplayName,
   getUserInitials,
@@ -17,6 +20,7 @@ type ProjectTaskCardProps = {
 };
 
 export function ProjectTaskCard({ task }: ProjectTaskCardProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const status = getDisplayableTaskStatus(task.status);
 
   return (
@@ -35,13 +39,30 @@ export function ProjectTaskCard({ task }: ProjectTaskCardProps) {
             </Typography>
           </div>
 
-          <button
-            aria-label={`Options de la tâche ${task.title}`}
-            className={styles.menuButton}
-            type="button"
-          >
-            <Icon color="dark" name="menu" size="16px" />
-          </button>
+          <div className={styles.menu}>
+            <button
+              aria-expanded={isMenuOpen}
+              aria-label={`Options de la tâche ${task.title}`}
+              className={styles.menuButton}
+              onClick={() => setIsMenuOpen((current) => !current)}
+              type="button"
+            >
+              <Icon color="dark" name="menu" size="16px" />
+            </button>
+
+            {isMenuOpen ? (
+              <div className={styles.menuPanel}>
+                <button className={styles.menuItem} type="button">
+                  <Icon color="dark" name="pencil" size="14px" />
+                  Modifier
+                </button>
+                <button className={styles.menuItem} type="button">
+                  <Icon color="dark" name="trash" size="14px" />
+                  Effacer
+                </button>
+              </div>
+            ) : null}
+          </div>
         </header>
 
         <div className={styles.details}>
@@ -74,7 +95,9 @@ export function ProjectTaskCard({ task }: ProjectTaskCardProps) {
       </div>
 
       <footer className={styles.footer}>
-        <Typography variant="small">Commentaires ({task.comments.length})</Typography>
+        <Typography variant="small">
+          Commentaires ({task.comments.length})
+        </Typography>
         <Icon color="dark" name="arrowTop" size="14px" />
       </footer>
     </article>
