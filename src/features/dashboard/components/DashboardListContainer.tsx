@@ -1,5 +1,5 @@
 import type { Task } from "@/features/tasks/types/task.types";
-import { Icon } from "@/shared/components/Icons";
+import { SearchInput } from "@/shared/components/SearchInput";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskCard } from "./DashboardTaskCard";
 import styles from "./DashboardListContainer.module.css";
@@ -21,22 +21,12 @@ export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
           </Typography>
         </div>
 
-        <label className={styles.search}>
-          <span className={styles.searchLabel}>Rechercher une tâche</span>
-          <input
-            className={styles.searchInput}
-            id="dashboard-task-search"
-            name="taskSearch"
-            placeholder="Rechercher une tâche"
-            type="search"
-          />
-          <Icon
-            className={styles.searchIcon}
-            color="neutral"
-            name="search"
-            size="14px"
-          />
-        </label>
+        <SearchInput
+          className={styles.search}
+          id="dashboard-task-search"
+          label="Rechercher une tâche"
+          name="taskSearch"
+        />
       </header>
 
       <div className={styles.tasks}>

@@ -26,73 +26,12 @@
   gap: var(--space-3);
 }
 
-.status,
-.search {
-  position: relative;
-}
-
-.status {
-  width: 150px;
-}
-
 .search {
   width: 300px;
 }
 
-.hiddenLabel {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-.statusSelect,
-.searchInput {
-  width: 100%;
-  min-height: 60px;
-  border: 1px solid var(--color-border-neutral);
-  border-radius: var(--radius-md);
-  background: var(--color-background-light);
-  color: var(--color-text-secondary);
-  font-family: var(--font-main);
-  font-size: var(--text-sm);
-  outline: none;
-}
-
-.statusSelect {
-  padding: 0 48px 0 var(--space-5);
-  appearance: none;
-}
-
-.searchInput {
-  padding: 0 52px 0 var(--space-5);
-}
-
-.statusSelect:focus,
-.searchInput:focus {
-  border-color: var(--color-border-brand);
-}
-
-.searchInput::placeholder {
-  color: var(--color-text-neutral);
-}
-
-.statusIcon,
-.searchIcon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-.statusIcon {
-  right: var(--space-5);
-}
-
-.searchIcon {
-  right: var(--space-5);
+.status {
+  width: 150px;
 }
 
 @media (max-width: 1024px) {
@@ -114,5 +53,4 @@
     margin: 0 var(--space-4) var(--space-6);
     padding: var(--space-5);
   }
-
 }

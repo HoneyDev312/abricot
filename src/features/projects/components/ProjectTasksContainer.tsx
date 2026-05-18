@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Icon } from "@/shared/components/Icons";
+import { SearchInput } from "@/shared/components/SearchInput";
+import { SelectFilter } from "@/shared/components/SelectFilter";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
 import styles from "./ProjectTasksContainer.module.css";
@@ -44,42 +45,24 @@ export function ProjectTasksContainer() {
             onChange={setActiveTab}
           />
 
-          <label className={styles.status}>
-            <span className={styles.hiddenLabel}>Filtrer par statut</span>
-            <select
-              className={styles.statusSelect}
-              id="project-task-status"
-              name="taskStatus"
-            >
-              <option value="">Statut</option>
-              <option value="TODO">À faire</option>
-              <option value="IN_PROGRESS">En cours</option>
-              <option value="DONE">Terminée</option>
-            </select>
-            <Icon
-              className={styles.statusIcon}
-              color="neutral"
-              name="arrowDown"
-              size="14px"
-            />
-          </label>
+          <SelectFilter
+            className={styles.status}
+            id="project-task-status"
+            label="Filtrer par statut"
+            name="taskStatus"
+          >
+            <option value="">Statut</option>
+            <option value="TODO">À faire</option>
+            <option value="IN_PROGRESS">En cours</option>
+            <option value="DONE">Terminée</option>
+          </SelectFilter>
 
-          <label className={styles.search}>
-            <span className={styles.hiddenLabel}>Rechercher une tâche</span>
-            <input
-              className={styles.searchInput}
-              id="project-task-search"
-              name="taskSearch"
-              placeholder="Rechercher une tâche"
-              type="search"
-            />
-            <Icon
-              className={styles.searchIcon}
-              color="neutral"
-              name="search"
-              size="14px"
-            />
-          </label>
+          <SearchInput
+            className={styles.search}
+            id="project-task-search"
+            label="Rechercher une tâche"
+            name="taskSearch"
+          />
         </div>
       </header>
     </section>
