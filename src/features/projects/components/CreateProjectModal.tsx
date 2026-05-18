@@ -1,10 +1,13 @@
 "use client";
 
+import { useActionState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { getDisplayName } from "@/features/users/services/user.helpers";
+import { createProjectAction } from "../services/project.actions";
 import type { ProjectUser } from "../types/project.types";
 import styles from "./CreateProjectModal.module.css";
 
@@ -19,6 +22,20 @@ export function CreateProjectModal({
   isOpen,
   onClose,
 }: CreateProjectModalProps) {
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction, isPending] = useActionState(createProjectAction, {});
+
+  useEffect(() => {
+    if (!state.success) {
+      return;
+    }
+
+    formRef.current?.reset();
+    onClose();
+    router.refresh();
+  }, [onClose, router, state.success]);
+
   return (
     <Modal
       className={styles.dialog}
@@ -27,7 +44,7 @@ export function CreateProjectModal({
       label="Créer un projet"
       onClose={onClose}
     >
-      <form className={styles.form}>
+      <form action={formAction} className={styles.form} ref={formRef}>
         <Typography as="h4" className={styles.title} variant="h4">
           Créer un projet
         </Typography>
@@ -38,7 +55,7 @@ export function CreateProjectModal({
             <input
               className={styles.control}
               id="create-project-title"
-              name="title"
+              name="name"
               required
               type="text"
             />
@@ -65,7 +82,7 @@ export function CreateProjectModal({
               >
                 <option value="">Choisir un ou plusieurs collaborateurs</option>
                 {contributors.map((contributor) => (
-                  <option key={contributor.id} value={contributor.id}>
+                  <option key={contributor.id} value={contributor.email}>
                     {getDisplayName(contributor)}
                   </option>
                 ))}
@@ -80,8 +97,19 @@ export function CreateProjectModal({
           </label>
         </div>
 
-        <Button disabled size="md" type="button" variant="disabled">
-          Ajouter un projet
+        {state.error ? (
+          <Typography className={styles.error} variant="small">
+            {state.error}
+          </Typography>
+        ) : null}
+
+        <Button
+          disabled={isPending}
+          size="md"
+          type="submit"
+          variant={isPending ? "disabled" : "dark"}
+        >
+          {isPending ? "Ajout..." : "Ajouter un projet"}
         </Button>
         <Typography
           className={styles.requiredHint}

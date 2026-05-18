@@ -1,6 +1,8 @@
 import { apiClient } from "@/shared/lib/api-client";
 import type { Task, TasksResponse } from "@/features/tasks/types/task.types";
 import type {
+  CreateProjectPayload,
+  CreateProjectResponse,
   Project,
   ProjectDetails,
   ProjectResponse,
@@ -15,6 +17,14 @@ export async function getProjects(): Promise<Project[]> {
   });
 
   return data.projects;
+}
+
+export async function createProject(
+  payload: CreateProjectPayload,
+): Promise<Project> {
+  const data = await apiClient.post<CreateProjectResponse>("/projects", payload);
+
+  return data.project;
 }
 
 export async function getProject(projectId: string): Promise<ProjectDetails> {

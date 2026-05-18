@@ -69,6 +69,11 @@
   pointer-events: none;
 }
 
+.error {
+  margin-top: calc(var(--space-5) * -1);
+  color: var(--color-text-todo);
+}
+
 .requiredHint {
   margin-top: calc(var(--space-5) * -1);
 }

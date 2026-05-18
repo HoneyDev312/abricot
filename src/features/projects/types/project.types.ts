@@ -55,6 +55,16 @@ export type ProjectsResponse = {
   projects: Project[];
 };
 
+export type CreateProjectPayload = {
+  contributors?: string[];
+  description: string;
+  name: string;
+};
+
+export type CreateProjectResponse = {
+  project: Project;
+};
+
 export type UsersSearchResponse = {
   users: ProjectUser[];
 };
