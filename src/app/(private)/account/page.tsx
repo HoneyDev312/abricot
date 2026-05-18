@@ -10,7 +10,7 @@ export default async function AccountPage() {
   return (
     <main>
       <form action={logoutAction} className={styles.logout}>
-        <Button type="submit" variant="outline">
+        <Button size="sm" type="submit" variant="outline">
           Se déconnecter
         </Button>
       </form>

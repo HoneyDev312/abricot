@@ -43,7 +43,12 @@ export function LoginForm() {
         </Typography>
       ) : null}
 
-      <Button className={styles.submit} disabled={isPending} type="submit">
+      <Button
+        className={styles.submit}
+        disabled={isPending}
+        fullWidth
+        type="submit"
+      >
         {isPending ? "Connexion..." : "Se connecter"}
       </Button>
 

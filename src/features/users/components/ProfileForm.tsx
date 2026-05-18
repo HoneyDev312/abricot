@@ -124,6 +124,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
         <Button
           className={styles.submit}
           disabled={!hasUnsavedChanges}
+          size="sm"
           variant={!hasUnsavedChanges ? "disabled" : "dark"}
           type="submit"
         >

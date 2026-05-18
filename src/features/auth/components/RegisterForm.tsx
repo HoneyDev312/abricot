@@ -54,7 +54,12 @@ export function RegisterForm() {
         </Typography>
       ) : null}
 
-      <Button className={styles.submit} disabled={isPending} type="submit">
+      <Button
+        className={styles.submit}
+        disabled={isPending}
+        fullWidth
+        type="submit"
+      >
         {isPending ? "Inscription..." : "S'inscrire"}
       </Button>
     </form>

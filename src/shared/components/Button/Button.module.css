@@ -1,7 +1,4 @@
 .button {
-  height: 50px;
-  max-width: 250px;
-  padding: 0 var(--space-8);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +13,25 @@
     border-color 160ms ease,
     color 160ms ease,
     opacity 160ms ease;
+}
+
+.md {
+  height: 50px;
+  max-width: 250px;
+  padding: 0 var(--space-8);
+  font-size: var(--text-md);
+}
+
+.sm {
+  height: 42px;
+  max-width: 250px;
+  padding: 0 var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.fullWidth {
+  width: 100%;
+  max-width: none;
 }
 
 .button:not(:disabled):hover {

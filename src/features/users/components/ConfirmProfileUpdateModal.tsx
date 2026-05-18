@@ -106,6 +106,7 @@ export function ConfirmProfileUpdateModal({
         <Button
           className={styles.submit}
           disabled={!isNotEmpty || isPending}
+          size="sm"
           variant={!isNotEmpty || isPending ? "disabled" : "dark"}
           type="submit"
         >
