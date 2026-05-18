@@ -3,12 +3,13 @@
 import { useActionState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
-import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { createProjectAction } from "../services/project.actions";
 import type { ProjectUser } from "../types/project.types";
+import { ProjectModalSelectField } from "./ProjectModalSelectField";
+import { ProjectModalTextField } from "./ProjectModalTextField";
 import styles from "./CreateProjectModal.module.css";
 
 type CreateProjectModalProps = {
@@ -50,51 +51,32 @@ export function CreateProjectModal({
         </Typography>
 
         <div className={styles.fields}>
-          <label className={styles.field} htmlFor="create-project-title">
-            <span className={styles.label}>Titre*</span>
-            <input
-              className={styles.control}
-              id="create-project-title"
-              name="name"
-              required
-              type="text"
-            />
-          </label>
+          <ProjectModalTextField
+            id="create-project-title"
+            label="Titre*"
+            name="name"
+            required
+          />
 
-          <label className={styles.field} htmlFor="create-project-description">
-            <span className={styles.label}>Description*</span>
-            <input
-              className={styles.control}
-              id="create-project-description"
-              name="description"
-              required
-              type="text"
-            />
-          </label>
+          <ProjectModalTextField
+            id="create-project-description"
+            label="Description*"
+            name="description"
+            required
+          />
 
-          <label className={styles.field} htmlFor="create-project-contributors">
-            <span className={styles.label}>Contributeurs</span>
-            <span className={styles.selectWrapper}>
-              <select
-                className={`${styles.control} ${styles.select}`}
-                id="create-project-contributors"
-                name="contributors"
-              >
-                <option value="">Choisir un ou plusieurs collaborateurs</option>
-                {contributors.map((contributor) => (
-                  <option key={contributor.id} value={contributor.email}>
-                    {getDisplayName(contributor)}
-                  </option>
-                ))}
-              </select>
-              <Icon
-                className={styles.selectIcon}
-                color="dark"
-                name="arrowDown"
-                size="16px"
-              />
-            </span>
-          </label>
+          <ProjectModalSelectField
+            id="create-project-contributors"
+            label="Contributeurs"
+            name="contributors"
+          >
+            <option value="">Choisir un ou plusieurs collaborateurs</option>
+            {contributors.map((contributor) => (
+              <option key={contributor.id} value={contributor.email}>
+                {getDisplayName(contributor)}
+              </option>
+            ))}
+          </ProjectModalSelectField>
         </div>
 
         {state.error ? (
