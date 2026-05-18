@@ -34,6 +34,9 @@ export function EditProjectModal({
   );
   const [values, setValues] = useState(initialValues);
   const [selectedContributor, setSelectedContributor] = useState("");
+  const [contributorsToRemove, setContributorsToRemove] = useState<string[]>(
+    [],
+  );
   const [state, formAction, isPending] = useActionState(
     updateProjectAction,
     {},
@@ -49,7 +52,8 @@ export function EditProjectModal({
   const hasChanges =
     values.name.trim() !== initialValues.name ||
     values.description.trim() !== initialValues.description ||
-    Boolean(selectedContributor);
+    Boolean(selectedContributor) ||
+    contributorsToRemove.length > 0;
 
   useEffect(() => {
     if (!state.success) {
@@ -59,6 +63,14 @@ export function EditProjectModal({
     onClose();
     router.refresh();
   }, [onClose, router, state.success]);
+
+  function toggleContributorToRemove(userId: string) {
+    setContributorsToRemove((current) =>
+      current.includes(userId)
+        ? current.filter((currentUserId) => currentUserId !== userId)
+        : [...current, userId],
+    );
+  }
 
   return (
     <Modal
@@ -139,6 +151,49 @@ export function EditProjectModal({
               />
             </span>
           </label>
+
+          {project.members.length > 0 ? (
+            <div className={styles.currentContributors}>
+              <Typography color="secondary" variant="small">
+                Contributeurs actuels
+              </Typography>
+              <div className={styles.contributorBadges}>
+                {project.members.map((member) => {
+                  const isMarkedForRemoval = contributorsToRemove.includes(
+                    member.userId,
+                  );
+
+                  return (
+                    <span
+                      className={
+                        isMarkedForRemoval
+                          ? `${styles.contributorBadge} ${styles.contributorBadgeRemoved}`
+                          : styles.contributorBadge
+                      }
+                      key={member.id}
+                    >
+                      {getDisplayName(member.user)}
+                      <button
+                        aria-label={`Retirer ${getDisplayName(member.user)}`}
+                        className={styles.removeContributorButton}
+                        onClick={() => toggleContributorToRemove(member.userId)}
+                        type="button"
+                      >
+                        ×
+                      </button>
+                      {isMarkedForRemoval ? (
+                        <input
+                          name="contributorsToRemove"
+                          type="hidden"
+                          value={member.userId}
+                        />
+                      ) : null}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
         </div>
 
         {state.error ? (

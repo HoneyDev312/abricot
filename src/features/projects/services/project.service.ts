@@ -56,6 +56,13 @@ export async function addProjectContributor(
   await apiClient.post(`/projects/${projectId}/contributors`, payload);
 }
 
+export async function removeProjectContributor(
+  projectId: string,
+  userId: string,
+) {
+  await apiClient.delete(`/projects/${projectId}/contributors/${userId}`);
+}
+
 export async function getProjectTasks(projectId: string): Promise<Task[]> {
   const data = await apiClient.get<TasksResponse>(`/projects/${projectId}/tasks`, {
     cache: "no-store",

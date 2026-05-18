@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import {
   addProjectContributor,
   createProject,
+  removeProjectContributor,
   updateProject,
 } from "./project.service";
 
@@ -68,6 +69,10 @@ export async function updateProjectAction(
     .getAll("contributors")
     .map((contributor) => String(contributor).trim())
     .filter(Boolean);
+  const contributorsToRemove = formData
+    .getAll("contributorsToRemove")
+    .map((contributor) => String(contributor).trim())
+    .filter(Boolean);
 
   if (!projectId || !name || !description) {
     return {
@@ -84,6 +89,12 @@ export async function updateProjectAction(
 
     await Promise.all(
       contributors.map((email) => addProjectContributor(projectId, { email })),
+    );
+
+    await Promise.all(
+      contributorsToRemove.map((userId) =>
+        removeProjectContributor(projectId, userId),
+      ),
     );
   } catch (error) {
     return {
