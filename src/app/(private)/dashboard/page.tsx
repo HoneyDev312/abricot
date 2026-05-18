@@ -1,4 +1,5 @@
 import { DashboardTabs } from "@/features/dashboard/components/DashboardTabs";
+import { getAssignedTasks } from "@/features/dashboard/services/dashboard.service";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { getUserProfile } from "@/features/users/services/user.service";
 import { Button } from "@/shared/components/Button";
@@ -6,7 +7,10 @@ import { Typography } from "@/shared/components/Typography";
 import styles from "./page.module.css";
 
 export default async function DashboardPage() {
-  const profile = await getUserProfile();
+  const [profile, assignedTasks] = await Promise.all([
+    getUserProfile(),
+    getAssignedTasks(),
+  ]);
   const displayName = getDisplayName(profile);
 
   return (
@@ -26,7 +30,7 @@ export default async function DashboardPage() {
         </Button>
       </div>
 
-      <DashboardTabs />
+      <DashboardTabs assignedTasks={assignedTasks} />
     </main>
   );
 }

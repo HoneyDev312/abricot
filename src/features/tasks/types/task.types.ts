@@ -3,11 +3,18 @@ export type TaskStatus = "TODO" | "IN_PROGRESS" | "DONE" | "CANCELLED";
 export type TaskPriority = "LOW" | "MEDIUM" | "HIGH" | "URGENT";
 
 export type TaskUser = {
-  createdAt: string;
+  createdAt?: string;
   email: string;
+  firstname?: string | null;
   id: string;
   name?: string | null;
-  updatedAt: string;
+  updatedAt?: string;
+};
+
+export type TaskProject = {
+  description?: string | null;
+  id: string;
+  name: string;
 };
 
 export type TaskAssignee = {
@@ -37,6 +44,7 @@ export type Task = {
   dueDate?: string | null;
   id: string;
   priority: TaskPriority;
+  project?: TaskProject;
   projectId: string;
   status: TaskStatus;
   title: string;

@@ -1,21 +1,27 @@
+import type { DisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
+import {
+  formatTaskDate,
+  getDisplayableTaskStatus,
+} from "@/features/tasks/services/task.helpers";
+import type { Task } from "@/features/tasks/types/task.types";
 import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
-import {
-  DashboardTaskStatus,
-  type DashboardTaskStatusValue,
-} from "./DashboardTaskStatus";
+import { DashboardTaskStatus } from "./DashboardTaskStatus";
 import styles from "./DashboardTaskCard.module.css";
 
 type DashboardTaskCardProps = {
-  status?: DashboardTaskStatusValue;
+  task?: Task;
+  status?: DisplayableTaskStatus;
   variant?: "kanban" | "list";
 };
 
 export function DashboardTaskCard({
+  task,
   status = "TODO",
   variant = "list",
 }: DashboardTaskCardProps) {
+  const taskStatus = getDisplayableTaskStatus(task?.status, status);
   const cardClassName =
     variant === "kanban" ? `${styles.card} ${styles.cardKanban}` : styles.card;
 
@@ -25,15 +31,15 @@ export function DashboardTaskCard({
         <div className={styles.header}>
           <div className={styles.heading}>
             <Typography as="h5" variant="h5" weight="bold">
-              Nom de la tâche
+              {task?.title ?? "Nom de la tâche"}
             </Typography>
             <Typography color="secondary" variant="small">
-              Description de la tâche
+              {task?.description || "Description de la tâche"}
             </Typography>
           </div>
 
           {variant === "kanban" ? (
-            <DashboardTaskStatus status={status} />
+            <DashboardTaskStatus status={taskStatus} />
           ) : null}
         </div>
 
@@ -41,28 +47,28 @@ export function DashboardTaskCard({
           <li className={styles.metaItem}>
             <Icon color="neutral" name="folder" size="14px" />
             <Typography color="secondary" variant="small">
-              Nom du projet
+              {task?.project?.name ?? "Nom du projet"}
             </Typography>
           </li>
           <li className={styles.metaSeparator} />
           <li className={styles.metaItem}>
             <Icon color="neutral" name="calendar" size="14px" />
             <Typography color="secondary" variant="small">
-              9 mars
+              {formatTaskDate(task?.dueDate)}
             </Typography>
           </li>
           <li className={styles.metaSeparator} />
           <li className={styles.metaItem}>
             <Icon color="neutral" name="comment" size="14px" />
             <Typography color="secondary" variant="small">
-              2
+              {task?.comments.length ?? 0}
             </Typography>
           </li>
         </ul>
       </div>
 
       <div className={styles.actions}>
-        {variant === "list" ? <DashboardTaskStatus status={status} /> : null}
+        {variant === "list" ? <DashboardTaskStatus status={taskStatus} /> : null}
         <Button className={styles.viewButton} type="button">
           Voir
         </Button>

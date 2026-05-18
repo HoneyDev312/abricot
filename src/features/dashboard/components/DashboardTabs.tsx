@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Task } from "@/features/tasks/types/task.types";
 import { Icon, type IconName } from "@/shared/components/Icons";
 import { DashboardKanbanContainer } from "./DashboardKanbanContainer";
 import { DashboardListContainer } from "./DashboardListContainer";
@@ -27,7 +28,11 @@ const dashboardTabs: DashboardTab[] = [
   },
 ];
 
-export function DashboardTabs() {
+type DashboardTabsProps = {
+  assignedTasks: Task[];
+};
+
+export function DashboardTabs({ assignedTasks }: DashboardTabsProps) {
   const [activeTab, setActiveTab] = useState<DashboardTabId>("list");
 
   return (
@@ -58,8 +63,12 @@ export function DashboardTabs() {
         })}
       </div>
 
-      {activeTab === "list" ? <DashboardListContainer /> : null}
-      {activeTab === "kanban" ? <DashboardKanbanContainer /> : null}
+      {activeTab === "list" ? (
+        <DashboardListContainer tasks={assignedTasks} />
+      ) : null}
+      {activeTab === "kanban" ? (
+        <DashboardKanbanContainer tasks={assignedTasks} />
+      ) : null}
     </>
   );
 }

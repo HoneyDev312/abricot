@@ -1,17 +1,12 @@
-import type { TaskStatus } from "@/features/tasks/types/task.types";
+import type { DisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
 import styles from "./DashboardTaskStatus.module.css";
 
-export type DashboardTaskStatusValue = Extract<
-  TaskStatus,
-  "DONE" | "IN_PROGRESS" | "TODO"
->;
-
 type DashboardTaskStatusProps = {
-  status: DashboardTaskStatusValue;
+  status: DisplayableTaskStatus;
 };
 
 const statusConfig: Record<
-  DashboardTaskStatusValue,
+  DisplayableTaskStatus,
   { className: string; label: string }
 > = {
   DONE: {

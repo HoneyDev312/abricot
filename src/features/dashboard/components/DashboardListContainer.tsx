@@ -1,9 +1,14 @@
+import type { Task } from "@/features/tasks/types/task.types";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskCard } from "./DashboardTaskCard";
 import styles from "./DashboardListContainer.module.css";
 
-export function DashboardListContainer() {
+type DashboardListContainerProps = {
+  tasks: Task[];
+};
+
+export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
   return (
     <section className={styles.container} aria-label="Mes tâches assignées">
       <header className={styles.header}>
@@ -35,7 +40,9 @@ export function DashboardListContainer() {
       </header>
 
       <div className={styles.tasks}>
-        <DashboardTaskCard />
+        {tasks.map((task) => (
+          <DashboardTaskCard key={task.id} task={task} />
+        ))}
       </div>
     </section>
   );
