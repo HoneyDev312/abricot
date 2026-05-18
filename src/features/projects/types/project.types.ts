@@ -29,6 +29,28 @@ export type Project = {
   userRole: string | null;
 };
 
+export type ProjectTask = {
+  createdAt: string;
+  creator: ProjectUser;
+  creatorId: string;
+  description: string | null;
+  dueDate: string | null;
+  id: string;
+  priority: string;
+  projectId: string;
+  status: string;
+  title: string;
+  updatedAt: string;
+};
+
+export type ProjectDetails = Project & {
+  tasks: ProjectTask[];
+};
+
+export type ProjectResponse = {
+  project: ProjectDetails;
+};
+
 export type ProjectsResponse = {
   projects: Project[];
 };

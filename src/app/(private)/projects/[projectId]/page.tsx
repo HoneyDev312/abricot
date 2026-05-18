@@ -1,12 +1,24 @@
-import { PageSection } from "@/shared/components/PageSection";
+import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
+import { PageHeader } from "../../components/PageHeader";
 import styles from "./page.module.css";
 
-export default function ProjectPage() {
+type ProjectPageProps = {
+  params: Promise<{
+    projectId: string;
+  }>;
+};
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { projectId } = await params;
+  const project = await getProjectOrNotFound(projectId);
+
   return (
-    <main>
-      <PageSection className={styles.page} label="Projet">
-        Projet
-      </PageSection>
+    <main className={styles.page}>
+      <PageHeader
+        actionLabel="+ Créer une tâche"
+        description={project.description || "Aucune description"}
+        title={project.name}
+      />
     </main>
   );
 }
