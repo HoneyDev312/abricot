@@ -1,7 +1,7 @@
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import Link from "next/link";
-import type { ProjectDetails } from "../types/project.types";
+import type { ProjectDetails, ProjectUser } from "../types/project.types";
 import { EditProjectButton } from "./EditProjectButton";
 import styles from "./ProjectDetailsHeader.module.css";
 
@@ -9,12 +9,14 @@ type ProjectDetailsHeaderProps = {
   description: string;
   project: ProjectDetails;
   title: string;
+  contributors: ProjectUser[];
 };
 
 export function ProjectDetailsHeader({
   description,
   project,
   title,
+  contributors,
 }: ProjectDetailsHeaderProps) {
   return (
     <header className={styles.header}>
@@ -32,7 +34,7 @@ export function ProjectDetailsHeader({
             <Typography as="h4" variant="h4">
               {title}
             </Typography>
-            <EditProjectButton project={project} />
+            <EditProjectButton project={project} contributors={contributors} />
           </div>
 
           <Typography color="secondary" variant="large">
@@ -45,7 +47,11 @@ export function ProjectDetailsHeader({
         <button className={styles.createTaskButton} type="button">
           Créer une tâche
         </button>
-        <button aria-label="Assistant IA" className={styles.aiButton} type="button">
+        <button
+          aria-label="Assistant IA"
+          className={styles.aiButton}
+          type="button"
+        >
           <Icon color="light" name="star" size="16px" />
           IA
         </button>

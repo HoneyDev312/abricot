@@ -7,19 +7,22 @@ import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { updateProjectAction } from "../services/project.actions";
-import type { ProjectDetails } from "../types/project.types";
+import type { ProjectDetails, ProjectUser } from "../types/project.types";
 import styles from "./EditProjectModal.module.css";
+import { getDisplayName } from "@/features/users/services/user.helpers";
 
 type EditProjectModalProps = {
   isOpen: boolean;
   onClose: () => void;
   project: ProjectDetails;
+  contributors: ProjectUser[];
 };
 
 export function EditProjectModal({
   isOpen,
   onClose,
   project,
+  contributors,
 }: EditProjectModalProps) {
   const router = useRouter();
   const initialValues = useMemo(
@@ -30,11 +33,23 @@ export function EditProjectModal({
     [project.description, project.name],
   );
   const [values, setValues] = useState(initialValues);
-  const [state, formAction, isPending] = useActionState(updateProjectAction, {});
+  const [selectedContributor, setSelectedContributor] = useState("");
+  const [state, formAction, isPending] = useActionState(
+    updateProjectAction,
+    {},
+  );
+  const existingUserIds = new Set([
+    project.ownerId,
+    ...project.members.map((member) => member.userId),
+  ]);
+  const availableContributors = contributors.filter(
+    (contributor) => !existingUserIds.has(contributor.id),
+  );
 
   const hasChanges =
     values.name.trim() !== initialValues.name ||
-    values.description.trim() !== initialValues.description;
+    values.description.trim() !== initialValues.description ||
+    Boolean(selectedContributor);
 
   useEffect(() => {
     if (!state.success) {
@@ -102,11 +117,19 @@ export function EditProjectModal({
             <span className={styles.selectWrapper}>
               <select
                 className={`${styles.control} ${styles.select}`}
-                disabled
                 id="edit-project-contributors"
                 name="contributors"
+                onChange={(event) => setSelectedContributor(event.target.value)}
+                value={selectedContributor}
               >
-                <option>{project.members.length} collaborateurs</option>
+                <option value="">
+                  {project.members.length} collaborateurs
+                </option>
+                {availableContributors.map((contributor) => (
+                  <option key={contributor.id} value={contributor.email}>
+                    {getDisplayName(contributor)}
+                  </option>
+                ))}
               </select>
               <Icon
                 className={styles.selectIcon}

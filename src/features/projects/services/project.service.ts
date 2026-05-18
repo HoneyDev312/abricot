@@ -1,6 +1,7 @@
 import { apiClient } from "@/shared/lib/api-client";
 import type { Task, TasksResponse } from "@/features/tasks/types/task.types";
 import type {
+  AddProjectContributorPayload,
   CreateProjectPayload,
   CreateProjectResponse,
   Project,
@@ -46,6 +47,13 @@ export async function updateProject(
   );
 
   return data.project;
+}
+
+export async function addProjectContributor(
+  projectId: string,
+  payload: AddProjectContributorPayload,
+) {
+  await apiClient.post(`/projects/${projectId}/contributors`, payload);
 }
 
 export async function getProjectTasks(projectId: string): Promise<Task[]> {

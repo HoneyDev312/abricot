@@ -70,6 +70,10 @@ export type UpdateProjectPayload = {
   name: string;
 };
 
+export type AddProjectContributorPayload = {
+  email: string;
+};
+
 export type UsersSearchResponse = {
   users: ProjectUser[];
 };

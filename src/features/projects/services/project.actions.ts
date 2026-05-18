@@ -1,7 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createProject, updateProject } from "./project.service";
+import {
+  addProjectContributor,
+  createProject,
+  updateProject,
+} from "./project.service";
 
 export type CreateProjectActionState = {
   error?: string;
@@ -60,6 +64,10 @@ export async function updateProjectAction(
   const projectId = String(formData.get("projectId") ?? "").trim();
   const name = String(formData.get("name") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
+  const contributors = formData
+    .getAll("contributors")
+    .map((contributor) => String(contributor).trim())
+    .filter(Boolean);
 
   if (!projectId || !name || !description) {
     return {
@@ -73,6 +81,10 @@ export async function updateProjectAction(
       description,
       name,
     });
+
+    await Promise.all(
+      contributors.map((email) => addProjectContributor(projectId, { email })),
+    );
   } catch (error) {
     return {
       error:

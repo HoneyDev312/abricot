@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import type { ProjectDetails } from "../types/project.types";
+import type { ProjectDetails, ProjectUser } from "../types/project.types";
 import { EditProjectModal } from "./EditProjectModal";
 import styles from "./EditProjectButton.module.css";
 
 type EditProjectButtonProps = {
   project: ProjectDetails;
+  contributors: ProjectUser[];
 };
 
-export function EditProjectButton({ project }: EditProjectButtonProps) {
+export function EditProjectButton({
+  project,
+  contributors,
+}: EditProjectButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -27,6 +31,7 @@ export function EditProjectButton({ project }: EditProjectButtonProps) {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           project={project}
+          contributors={contributors}
         />
       ) : null}
     </>
