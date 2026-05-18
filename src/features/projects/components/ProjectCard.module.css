@@ -84,6 +84,11 @@
 .contributorAvatar {
   background: var(--color-background-neutral);
   color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-light);
+}
+
+.contributorAvatar + .contributorAvatar {
+  margin-left: -16px;
 }
 
 .ownerBadge {

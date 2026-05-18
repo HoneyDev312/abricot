@@ -21,6 +21,7 @@
   --color-border-brand: var(--color-brand-primary);
   --color-border-neutral: #e5e7eb;
   --color-border-dark: #9ca3af;
+  --color-border-light: #ffffff;
 
   --text-xs: 12px;
   --text-sm: 14px;

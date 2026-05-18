@@ -41,10 +41,19 @@ export function getUserInitials({
   email,
   firstname,
   name,
-}: Pick<UserProfile, "email" | "firstname" | "name">) {
-  const initials = [firstname, name]
+}: {
+  email: string;
+  firstname?: string | null;
+  name?: string | null;
+}) {
+  const nameParts = [firstname, name]
     .filter(Boolean)
-    .map((part) => part?.trim().charAt(0).toUpperCase())
+    .flatMap((part) => part?.trim().split(" "))
+    .filter((part): part is string => Boolean(part));
+
+  const initials = nameParts
+    .map((part) => part.charAt(0).toUpperCase())
+    .slice(0, 2)
     .join("");
 
   return initials || email.trim().charAt(0).toUpperCase();
