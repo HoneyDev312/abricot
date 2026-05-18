@@ -23,7 +23,7 @@ export default async function PrivateLayout({
       <div className={styles.content}>{children}</div>
 
       <footer className={styles.footer}>
-        <Logo className={styles.footerLogo} />
+        <Logo className={styles.footerLogo} size="sm" tone="dark" />
         <Typography variant="navLink" color="primary">
           Abricot 2025
         </Typography>

@@ -17,7 +17,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
     : 0;
   const visibleMembers = project.members;
   const teamCount = project.members.length + 1;
-  console.log("ProjectCard rendered for project:", project);
 
   return (
     <Link

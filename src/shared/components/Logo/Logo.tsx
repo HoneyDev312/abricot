@@ -2,13 +2,28 @@ import styles from "./Logo.module.css";
 
 type LogoProps = {
   className?: string;
+  size?: "lg" | "md" | "sm";
+  tone?: "brand" | "dark";
 };
 
-export function Logo({ className }: LogoProps) {
+export function Logo({
+  className,
+  size = "lg",
+  tone = "brand",
+}: LogoProps) {
+  const logoClassName = [
+    styles.logo,
+    styles[size],
+    styles[tone],
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <span
       aria-label={"Abricot"}
-      className={className ? `${styles.logo} ${className}` : styles.logo}
+      className={logoClassName}
       role="img"
     />
   );

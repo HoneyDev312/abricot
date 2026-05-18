@@ -46,7 +46,7 @@ export function PrivateHeader({ userInitials }: PrivateHeaderProps) {
           aria-label="Retour au tableau de bord"
           className={styles.logoLink}
         >
-          <Logo className={styles.logo} />
+          <Logo size="md" />
         </NextLink>
 
         <nav className={styles.nav} aria-label="Navigation principale">
