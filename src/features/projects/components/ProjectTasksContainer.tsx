@@ -5,11 +5,15 @@ import { SearchInput } from "@/shared/components/SearchInput";
 import { SelectFilter } from "@/shared/components/SelectFilter";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
-import type { Task } from "@/features/tasks/types/task.types";
+import type { Task, TaskStatus } from "@/features/tasks/types/task.types";
 import { ProjectTaskCard } from "./ProjectTaskCard";
 import styles from "./ProjectTasksContainer.module.css";
 
 type ProjectTaskTabId = "calendar" | "list";
+type ProjectTaskStatusFilter = Extract<
+  TaskStatus,
+  "DONE" | "IN_PROGRESS" | "TODO"
+>;
 
 const projectTaskTabs: TabItem<ProjectTaskTabId>[] = [
   {
@@ -30,6 +34,12 @@ type ProjectTasksContainerProps = {
 
 export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
   const [activeTab, setActiveTab] = useState<ProjectTaskTabId>("list");
+  const [statusFilter, setStatusFilter] = useState<
+    ProjectTaskStatusFilter | ""
+  >("");
+  const filteredTasks = statusFilter
+    ? tasks.filter((task) => task.status === statusFilter)
+    : tasks;
 
   return (
     <section className={styles.container} aria-label="Tâches du projet">
@@ -56,6 +66,10 @@ export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
             id="project-task-status"
             label="Filtrer par statut"
             name="taskStatus"
+            onChange={(event) =>
+              setStatusFilter(event.target.value as ProjectTaskStatusFilter | "")
+            }
+            value={statusFilter}
           >
             <option value="">Statut</option>
             <option value="TODO">À faire</option>
@@ -73,9 +87,18 @@ export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
       </header>
 
       <div className={styles.tasks}>
-        {tasks.map((task) => (
+        {filteredTasks.map((task) => (
           <ProjectTaskCard key={task.id} task={task} />
         ))}
+        {!filteredTasks.length ? (
+          <Typography
+            className={styles.empty}
+            color="secondary"
+            variant="medium"
+          >
+            Aucune tâche pour ce statut.
+          </Typography>
+        ) : null}
       </div>
     </section>
   );
