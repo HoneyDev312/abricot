@@ -13,3 +13,7 @@ export async function getProjectOrNotFound(projectId: string) {
     throw error;
   }
 }
+
+export function getPeopleCountLabel(count: number) {
+  return count > 1 ? `${count} personnes` : `${count} personne`;
+}

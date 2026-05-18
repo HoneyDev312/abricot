@@ -1,5 +1,6 @@
-import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
+import { ProjectContributors } from "@/features/projects/components/ProjectContributors";
 import { ProjectDetailsHeader } from "@/features/projects/components/ProjectDetailsHeader";
+import { getProjectOrNotFound } from "@/features/projects/services/project.helpers";
 import styles from "./page.module.css";
 
 type ProjectPageProps = {
@@ -18,6 +19,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         description={project.description || "Aucune description"}
         title={project.name}
       />
+      <ProjectContributors members={project.members} owner={project.owner} />
     </main>
   );
 }
