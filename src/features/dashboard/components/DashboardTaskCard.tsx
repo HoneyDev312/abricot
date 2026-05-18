@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { DisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
 import {
   formatTaskDate,
@@ -8,6 +11,7 @@ import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskStatus } from "./DashboardTaskStatus";
+import { DashboardTaskDetailsModal } from "./DashboardTaskDetailsModal";
 import styles from "./DashboardTaskCard.module.css";
 
 type DashboardTaskCardProps = {
@@ -21,6 +25,7 @@ export function DashboardTaskCard({
   status = "TODO",
   variant = "list",
 }: DashboardTaskCardProps) {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const taskStatus = getDisplayableTaskStatus(task?.status, status);
   const cardClassName =
     variant === "kanban" ? `${styles.card} ${styles.cardKanban}` : styles.card;
@@ -69,10 +74,23 @@ export function DashboardTaskCard({
 
       <div className={styles.actions}>
         {variant === "list" ? <DashboardTaskStatus status={taskStatus} /> : null}
-        <Button className={styles.viewButton} type="button">
+        <Button
+          className={styles.viewButton}
+          disabled={!task}
+          onClick={() => setIsDetailsOpen(true)}
+          type="button"
+        >
           Voir
         </Button>
       </div>
+
+      {task ? (
+        <DashboardTaskDetailsModal
+          isOpen={isDetailsOpen}
+          onClose={() => setIsDetailsOpen(false)}
+          task={task}
+        />
+      ) : null}
     </article>
   );
 }
