@@ -1,8 +1,29 @@
+"use client";
+
+import { useState } from "react";
 import { Icon } from "@/shared/components/Icons";
+import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
 import styles from "./ProjectTasksContainer.module.css";
 
+type ProjectTaskTabId = "calendar" | "list";
+
+const projectTaskTabs: TabItem<ProjectTaskTabId>[] = [
+  {
+    icon: "task",
+    id: "list",
+    label: "Liste",
+  },
+  {
+    icon: "calendar",
+    id: "calendar",
+    label: "Calendrier",
+  },
+];
+
 export function ProjectTasksContainer() {
+  const [activeTab, setActiveTab] = useState<ProjectTaskTabId>("list");
+
   return (
     <section className={styles.container} aria-label="Tâches du projet">
       <header className={styles.header}>
@@ -16,30 +37,12 @@ export function ProjectTasksContainer() {
         </div>
 
         <div className={styles.controls}>
-          <div
-            aria-label="Affichage des tâches du projet"
-            className={styles.tabs}
-            role="tablist"
-          >
-            <button
-              aria-selected="true"
-              className={`${styles.tab} ${styles.tabActive}`}
-              role="tab"
-              type="button"
-            >
-              <Icon color="brand" name="task" size="14px" />
-              Liste
-            </button>
-            <button
-              aria-selected="false"
-              className={styles.tab}
-              role="tab"
-              type="button"
-            >
-              <Icon color="brand" name="calendar" size="14px" />
-              Calendrier
-            </button>
-          </div>
+          <Tabs
+            activeTab={activeTab}
+            ariaLabel="Affichage des tâches du projet"
+            items={projectTaskTabs}
+            onChange={setActiveTab}
+          />
 
           <label className={styles.status}>
             <span className={styles.hiddenLabel}>Filtrer par statut</span>
