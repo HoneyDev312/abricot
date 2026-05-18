@@ -2,6 +2,7 @@ import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import Link from "next/link";
 import type { ProjectDetails, ProjectUser } from "../types/project.types";
+import { CreateTaskButton } from "./CreateTaskButton";
 import { EditProjectButton } from "./EditProjectButton";
 import styles from "./ProjectDetailsHeader.module.css";
 
@@ -44,9 +45,10 @@ export function ProjectDetailsHeader({
       </div>
 
       <div className={styles.actions}>
-        <button className={styles.createTaskButton} type="button">
-          Créer une tâche
-        </button>
+        <CreateTaskButton
+          className={styles.createTaskButton}
+          project={project}
+        />
         <button
           aria-label="Assistant IA"
           className={styles.aiButton}

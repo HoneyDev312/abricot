@@ -54,3 +54,16 @@ export type Task = {
 export type TasksResponse = {
   tasks: Task[];
 };
+
+export type CreateTaskPayload = {
+  assigneeIds?: string[];
+  description: string;
+  dueDate: string;
+  priority?: TaskPriority;
+  status: Extract<TaskStatus, "DONE" | "IN_PROGRESS" | "TODO">;
+  title: string;
+};
+
+export type TaskResponse = {
+  task: Task;
+};
