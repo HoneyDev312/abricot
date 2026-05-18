@@ -1,3 +1,4 @@
+import { ProjectsGrid } from "@/features/projects/components/ProjectsGrid";
 import { PageHeader } from "../components/PageHeader";
 
 export default function ProjectsPage() {
@@ -8,6 +9,7 @@ export default function ProjectsPage() {
         description="Gérez vos projets"
         title="Mes projets"
       />
+      <ProjectsGrid />
     </main>
   );
 }

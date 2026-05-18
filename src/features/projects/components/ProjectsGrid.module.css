@@ -1,0 +1,21 @@
+.grid {
+  width: calc(100% - var(--space-10) * 2);
+  margin: 0 var(--space-10) var(--space-9);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .grid {
+    width: calc(100% - var(--space-4) * 2);
+    margin: 0 var(--space-4) var(--space-6);
+    grid-template-columns: 1fr;
+  }
+}
