@@ -64,6 +64,15 @@ export type CreateTaskPayload = {
   title: string;
 };
 
+export type UpdateTaskPayload = {
+  assigneeIds?: string[];
+  description?: string;
+  dueDate?: string;
+  priority?: TaskPriority;
+  status?: Extract<TaskStatus, "DONE" | "IN_PROGRESS" | "TODO">;
+  title?: string;
+};
+
 export type TaskResponse = {
   task: Task;
 };

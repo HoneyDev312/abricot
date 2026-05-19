@@ -6,6 +6,7 @@ import { SelectFilter } from "@/shared/components/SelectFilter";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
 import type { Task, TaskStatus } from "@/features/tasks/types/task.types";
+import type { ProjectDetails } from "../types/project.types";
 import { ProjectTaskCard } from "./ProjectTaskCard";
 import styles from "./ProjectTasksContainer.module.css";
 
@@ -29,10 +30,14 @@ const projectTaskTabs: TabItem<ProjectTaskTabId>[] = [
 ];
 
 type ProjectTasksContainerProps = {
+  project: ProjectDetails;
   tasks: Task[];
 };
 
-export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
+export function ProjectTasksContainer({
+  project,
+  tasks,
+}: ProjectTasksContainerProps) {
   const [activeTab, setActiveTab] = useState<ProjectTaskTabId>("list");
   const [statusFilter, setStatusFilter] = useState<
     ProjectTaskStatusFilter | ""
@@ -88,7 +93,7 @@ export function ProjectTasksContainer({ tasks }: ProjectTasksContainerProps) {
 
       <div className={styles.tasks}>
         {filteredTasks.map((task) => (
-          <ProjectTaskCard key={task.id} task={task} />
+          <ProjectTaskCard key={task.id} project={project} task={task} />
         ))}
         {!filteredTasks.length ? (
           <Typography

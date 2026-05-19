@@ -62,23 +62,19 @@
   opacity: 0.8;
 }
 
-.statusButton:focus-visible {
-  outline: 2px solid var(--color-brand-primary);
+.statusButton[aria-pressed="true"] {
+  outline: 1px solid currentColor;
   outline-offset: 2px;
 }
 
-.statusButton[aria-pressed="true"] {
-  outline: 1px solid currentColor;
+.statusButton:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
   outline-offset: 2px;
 }
 
 .error {
   margin-top: calc(var(--space-5) * -1);
   color: var(--color-text-todo);
-}
-
-.requiredHint {
-  margin-top: calc(var(--space-5) * -1);
 }
 
 @media (max-width: 720px) {

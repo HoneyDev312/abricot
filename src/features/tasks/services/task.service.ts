@@ -3,6 +3,7 @@ import type {
   CreateTaskPayload,
   Task,
   TaskResponse,
+  UpdateTaskPayload,
 } from "../types/task.types";
 
 export async function createTask(
@@ -11,6 +12,19 @@ export async function createTask(
 ): Promise<Task> {
   const data = await apiClient.post<TaskResponse>(
     `/projects/${projectId}/tasks`,
+    payload,
+  );
+
+  return data.task;
+}
+
+export async function updateTask(
+  projectId: string,
+  taskId: string,
+  payload: UpdateTaskPayload,
+): Promise<Task> {
+  const data = await apiClient.put<TaskResponse>(
+    `/projects/${projectId}/tasks/${taskId}`,
     payload,
   );
 

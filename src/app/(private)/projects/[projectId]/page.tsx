@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         contributors={contributors}
       />
       <ProjectContributors members={project.members} owner={project.owner} />
-      <ProjectTasksContainer tasks={tasks} />
+      <ProjectTasksContainer project={project} tasks={tasks} />
     </main>
   );
 }
