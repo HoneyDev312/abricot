@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { filterTasksByTitle } from "@/features/tasks/services/task.helpers";
 import type { Task } from "@/features/tasks/types/task.types";
 import { SearchInput } from "@/shared/components/SearchInput";
 import { Typography } from "@/shared/components/Typography";
@@ -9,6 +13,9 @@ type DashboardListContainerProps = {
 };
 
 export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
+  const [search, setSearch] = useState("");
+  const filteredTasks = filterTasksByTitle(tasks, search);
+
   return (
     <section className={styles.container} aria-label="Mes tâches assignées">
       <header className={styles.header}>
@@ -26,13 +33,24 @@ export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
           id="dashboard-task-search"
           label="Rechercher une tâche"
           name="taskSearch"
+          onChange={(event) => setSearch(event.target.value)}
+          value={search}
         />
       </header>
 
       <div className={styles.tasks}>
-        {tasks.map((task) => (
+        {filteredTasks.map((task) => (
           <DashboardTaskCard key={task.id} task={task} />
         ))}
+        {!filteredTasks.length ? (
+          <Typography
+            className={styles.empty}
+            color="secondary"
+            variant="medium"
+          >
+            Aucune tâche ne correspond à votre recherche.
+          </Typography>
+        ) : null}
       </div>
     </section>
   );

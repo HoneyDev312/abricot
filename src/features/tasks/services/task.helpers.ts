@@ -43,3 +43,15 @@ export function groupTasksByDisplayableStatus(tasks: Task[]) {
     },
   );
 }
+
+export function filterTasksByTitle(tasks: Task[], search: string) {
+  const normalizedSearch = search.trim().toLocaleLowerCase("fr-FR");
+
+  if (!normalizedSearch) {
+    return tasks;
+  }
+
+  return tasks.filter((task) =>
+    task.title.toLocaleLowerCase("fr-FR").includes(normalizedSearch),
+  );
+}

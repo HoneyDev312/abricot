@@ -5,6 +5,7 @@ import { SearchInput } from "@/shared/components/SearchInput";
 import { SelectFilter } from "@/shared/components/SelectFilter";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { Typography } from "@/shared/components/Typography";
+import { filterTasksByTitle } from "@/features/tasks/services/task.helpers";
 import type { Task, TaskStatus } from "@/features/tasks/types/task.types";
 import type { ProjectDetails } from "../types/project.types";
 import { ProjectTaskCard } from "./ProjectTaskCard";
@@ -42,9 +43,11 @@ export function ProjectTasksContainer({
   const [statusFilter, setStatusFilter] = useState<
     ProjectTaskStatusFilter | ""
   >("");
-  const filteredTasks = statusFilter
+  const [search, setSearch] = useState("");
+  const statusFilteredTasks = statusFilter
     ? tasks.filter((task) => task.status === statusFilter)
     : tasks;
+  const filteredTasks = filterTasksByTitle(statusFilteredTasks, search);
 
   return (
     <section className={styles.container} aria-label="Tâches du projet">
@@ -87,6 +90,8 @@ export function ProjectTasksContainer({
             id="project-task-search"
             label="Rechercher une tâche"
             name="taskSearch"
+            onChange={(event) => setSearch(event.target.value)}
+            value={search}
           />
         </div>
       </header>
@@ -101,7 +106,7 @@ export function ProjectTasksContainer({
             color="secondary"
             variant="medium"
           >
-            Aucune tâche pour ce statut.
+            Aucune tâche ne correspond à votre recherche.
           </Typography>
         ) : null}
       </div>

@@ -1,5 +1,6 @@
 .container {
   width: calc(100% - var(--space-10) * 2);
+  min-height: 760px;
   margin: var(--space-6) var(--space-10);
   padding: var(--space-7) var(--space-8);
   border: 1px solid var(--color-border-neutral);
@@ -27,6 +28,13 @@
   margin-top: var(--space-7);
   display: grid;
   gap: var(--space-5);
+}
+
+.empty {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+  text-align: center;
 }
 
 @media (max-width: 720px) {
