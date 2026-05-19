@@ -1,0 +1,99 @@
+.dialog {
+  width: min(100%, 580px);
+  height: min(760px, calc(100dvh - var(--space-10)));
+  padding: var(--space-8);
+  display: grid;
+}
+
+.content {
+  min-height: 0;
+  display: flex;
+}
+
+.layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.title {
+  color: var(--color-text-dark);
+}
+
+.promptForm {
+  margin-top: auto;
+  min-height: 48px;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-rounded);
+  background: var(--color-background-neutral);
+}
+
+.promptLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.hiddenLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.promptInput {
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--space-4);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  font-size: var(--text-xs);
+  outline: none;
+}
+
+.promptInput::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.submitButton {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-rounded);
+  background: var(--color-brand-primary);
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  opacity: 0.86;
+}
+
+.submitButton:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .dialog {
+    height: min(620px, calc(100dvh - var(--space-8)));
+    padding: var(--space-6);
+  }
+}

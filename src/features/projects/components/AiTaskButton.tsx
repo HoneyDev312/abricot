@@ -1,0 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { Icon } from "@/shared/components/Icons";
+import { AiTaskModal } from "./AiTaskModal";
+
+type AiTaskButtonProps = {
+  className?: string;
+};
+
+export function AiTaskButton({ className }: AiTaskButtonProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        aria-label="Assistant IA"
+        className={className}
+        onClick={() => setIsOpen(true)}
+        type="button"
+      >
+        <Icon color="light" name="star" size="16px" />
+        IA
+      </button>
+
+      {isOpen ? (
+        <AiTaskModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      ) : null}
+    </>
+  );
+}
