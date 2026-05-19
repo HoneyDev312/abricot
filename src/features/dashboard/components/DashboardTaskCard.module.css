@@ -72,6 +72,16 @@
   justify-items: start;
 }
 
+@media (max-width: 1024px) {
+  .cardKanban {
+    padding: var(--space-5) var(--space-3);
+    display: grid;
+    align-items: start;
+    justify-content: stretch;
+    gap: var(--space-5);
+  }
+}
+
 @media (max-width: 720px) {
   .card {
     display: grid;
