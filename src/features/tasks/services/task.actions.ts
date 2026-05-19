@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import type { CreateTaskPayload, UpdateTaskPayload } from "../types/task.types";
-import { createTask, updateTask } from "./task.service";
+import { createTask, deleteTask, updateTask } from "./task.service";
 
 export type CreateTaskActionState = {
   error?: string;
@@ -10,6 +10,11 @@ export type CreateTaskActionState = {
 };
 
 export type UpdateTaskActionState = {
+  error?: string;
+  success?: boolean;
+};
+
+export type DeleteTaskActionState = {
   error?: string;
   success?: boolean;
 };
@@ -99,6 +104,37 @@ export async function updateTaskAction(
         error instanceof Error
           ? error.message
           : "Impossible de modifier la tâche pour le moment",
+      success: false,
+    };
+  }
+
+  revalidatePath(`/projects/${projectId}`);
+
+  return { success: true };
+}
+
+export async function deleteTaskAction(
+  _state: DeleteTaskActionState,
+  formData: FormData,
+): Promise<DeleteTaskActionState> {
+  const projectId = String(formData.get("projectId") ?? "").trim();
+  const taskId = String(formData.get("taskId") ?? "").trim();
+
+  if (!projectId || !taskId) {
+    return {
+      error: "Impossible d'identifier la tâche à supprimer",
+      success: false,
+    };
+  }
+
+  try {
+    await deleteTask(projectId, taskId);
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Impossible de supprimer la tâche pour le moment",
       success: false,
     };
   }

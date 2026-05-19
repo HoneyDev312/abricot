@@ -30,3 +30,10 @@ export async function updateTask(
 
   return data.task;
 }
+
+export async function deleteTask(
+  projectId: string,
+  taskId: string,
+): Promise<void> {
+  await apiClient.delete<void>(`/projects/${projectId}/tasks/${taskId}`);
+}

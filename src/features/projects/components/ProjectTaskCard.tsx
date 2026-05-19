@@ -1,18 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import {
-  getDisplayName,
-  getUserInitials,
-} from "@/features/users/services/user.helpers";
+import { useActionState, useEffect, useState } from "react";
+import type { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { DashboardTaskStatus } from "@/features/dashboard/components/DashboardTaskStatus";
+import { deleteTaskAction } from "@/features/tasks/services/task.actions";
 import {
   formatTaskDate,
   getDisplayableTaskStatus,
 } from "@/features/tasks/services/task.helpers";
 import type { Task } from "@/features/tasks/types/task.types";
+import {
+  getDisplayName,
+  getUserInitials,
+} from "@/features/users/services/user.helpers";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
-import { DashboardTaskStatus } from "@/features/dashboard/components/DashboardTaskStatus";
 import type { ProjectDetails } from "../types/project.types";
 import { EditTaskModal } from "./EditTaskModal";
 import styles from "./ProjectTaskCard.module.css";
@@ -23,9 +26,32 @@ type ProjectTaskCardProps = {
 };
 
 export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [deleteState, deleteAction, isDeletePending] = useActionState(
+    deleteTaskAction,
+    {},
+  );
   const status = getDisplayableTaskStatus(task.status);
+
+  useEffect(() => {
+    if (!deleteState.success) {
+      return;
+    }
+
+    router.refresh();
+  }, [deleteState.success, router]);
+
+  function handleDeleteSubmit(event: FormEvent<HTMLFormElement>) {
+    const shouldDelete = window.confirm(
+      `Supprimer définitivement la tâche "${task.title}" ?`,
+    );
+
+    if (!shouldDelete) {
+      event.preventDefault();
+    }
+  }
 
   return (
     <>
@@ -68,10 +94,27 @@ export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
                     <Icon color="dark" name="pencil" size="14px" />
                     Modifier
                   </button>
-                  <button className={styles.menuItem} type="button">
-                    <Icon color="dark" name="trash" size="14px" />
-                    Effacer
-                  </button>
+                  <form
+                    action={deleteAction}
+                    className={styles.menuForm}
+                    onSubmit={handleDeleteSubmit}
+                  >
+                    <input name="projectId" type="hidden" value={project.id} />
+                    <input name="taskId" type="hidden" value={task.id} />
+                    <button
+                      className={styles.menuItem}
+                      disabled={isDeletePending}
+                      type="submit"
+                    >
+                      <Icon color="dark" name="trash" size="14px" />
+                      {isDeletePending ? "Suppression..." : "Effacer"}
+                    </button>
+                  </form>
+                  {deleteState.error ? (
+                    <Typography className={styles.menuError} variant="small">
+                      {deleteState.error}
+                    </Typography>
+                  ) : null}
                 </div>
               ) : null}
             </div>
