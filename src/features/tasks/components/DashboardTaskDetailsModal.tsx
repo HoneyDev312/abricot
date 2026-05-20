@@ -2,6 +2,7 @@ import {
   getDisplayName,
   getUserInitials,
 } from "@/features/users/services/user.helpers";
+import type { ProjectDetails } from "@/features/projects/types/project.types";
 import {
   formatTaskDate,
   getDisplayableTaskStatus,
@@ -11,18 +12,21 @@ import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskStatus } from "./DashboardTaskStatus";
+import { TaskActionsMenu } from "./TaskActionsMenu";
 import { TaskCommentsToggle } from "./TaskCommentsToggle";
 import styles from "./DashboardTaskDetailsModal.module.css";
 
 type DashboardTaskDetailsModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  project?: ProjectDetails;
   task: Task;
 };
 
 export function DashboardTaskDetailsModal({
   isOpen,
   onClose,
+  project,
   task,
 }: DashboardTaskDetailsModalProps) {
   const status = getDisplayableTaskStatus(task.status);
@@ -49,13 +53,7 @@ export function DashboardTaskDetailsModal({
             </Typography>
           </div>
 
-          <button
-            aria-label={`Options de la tâche ${task.title}`}
-            className={styles.menuButton}
-            type="button"
-          >
-            <Icon color="dark" name="menu" size="16px" />
-          </button>
+          <TaskActionsMenu project={project} task={task} />
         </header>
 
         <div className={styles.details}>

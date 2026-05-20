@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ProjectDetails } from "@/features/projects/types/project.types";
 import type { Task } from "@/features/tasks/types/task.types";
 import { Tabs, type TabItem } from "@/shared/components/Tabs";
 import { DashboardKanbanContainer } from "./DashboardKanbanContainer";
@@ -24,9 +25,13 @@ const dashboardTabs: TabItem<DashboardTabId>[] = [
 
 type DashboardTabsProps = {
   assignedTasks: Task[];
+  projectsById: Record<string, ProjectDetails>;
 };
 
-export function DashboardTabs({ assignedTasks }: DashboardTabsProps) {
+export function DashboardTabs({
+  assignedTasks,
+  projectsById,
+}: DashboardTabsProps) {
   const [activeTab, setActiveTab] = useState<DashboardTabId>("list");
 
   return (
@@ -40,10 +45,16 @@ export function DashboardTabs({ assignedTasks }: DashboardTabsProps) {
       />
 
       {activeTab === "list" ? (
-        <DashboardListContainer tasks={assignedTasks} />
+        <DashboardListContainer
+          projectsById={projectsById}
+          tasks={assignedTasks}
+        />
       ) : null}
       {activeTab === "kanban" ? (
-        <DashboardKanbanContainer tasks={assignedTasks} />
+        <DashboardKanbanContainer
+          projectsById={projectsById}
+          tasks={assignedTasks}
+        />
       ) : null}
     </>
   );

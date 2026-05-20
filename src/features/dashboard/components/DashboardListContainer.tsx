@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ProjectDetails } from "@/features/projects/types/project.types";
 import { filterTasksByTitle } from "@/features/tasks/services/task.helpers";
 import type { Task } from "@/features/tasks/types/task.types";
 import { SearchInput } from "@/shared/components/SearchInput";
@@ -9,10 +10,14 @@ import { DashboardTaskCard } from "../../tasks/components/DashboardTaskCard";
 import styles from "./DashboardListContainer.module.css";
 
 type DashboardListContainerProps = {
+  projectsById: Record<string, ProjectDetails>;
   tasks: Task[];
 };
 
-export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
+export function DashboardListContainer({
+  projectsById,
+  tasks,
+}: DashboardListContainerProps) {
   const [search, setSearch] = useState("");
   const filteredTasks = filterTasksByTitle(tasks, search);
 
@@ -40,7 +45,11 @@ export function DashboardListContainer({ tasks }: DashboardListContainerProps) {
 
       <div className={styles.tasks}>
         {filteredTasks.map((task) => (
-          <DashboardTaskCard key={task.id} task={task} />
+          <DashboardTaskCard
+            key={task.id}
+            project={projectsById[task.projectId]}
+            task={task}
+          />
         ))}
         {!filteredTasks.length ? (
           <Typography

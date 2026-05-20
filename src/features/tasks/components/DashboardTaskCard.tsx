@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ProjectDetails } from "@/features/projects/types/project.types";
 import type { DisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
 import {
   formatTaskDate,
@@ -15,12 +16,14 @@ import { DashboardTaskDetailsModal } from "../../tasks/components/DashboardTaskD
 import styles from "./DashboardTaskCard.module.css";
 
 type DashboardTaskCardProps = {
+  project?: ProjectDetails;
   task?: Task;
   status?: DisplayableTaskStatus;
   variant?: "kanban" | "list";
 };
 
 export function DashboardTaskCard({
+  project,
   task,
   status = "TODO",
   variant = "list",
@@ -90,6 +93,7 @@ export function DashboardTaskCard({
         <DashboardTaskDetailsModal
           isOpen={isDetailsOpen}
           onClose={() => setIsDetailsOpen(false)}
+          project={project}
           task={task}
         />
       ) : null}

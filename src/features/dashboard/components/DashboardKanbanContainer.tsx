@@ -2,6 +2,7 @@ import {
   groupTasksByDisplayableStatus,
   type DisplayableTaskStatus,
 } from "@/features/tasks/services/task.helpers";
+import type { ProjectDetails } from "@/features/projects/types/project.types";
 import type { Task } from "@/features/tasks/types/task.types";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskCard } from "../../tasks/components/DashboardTaskCard";
@@ -23,10 +24,12 @@ const kanbanColumns = [
 ] satisfies Array<{ status: DisplayableTaskStatus; title: string }>;
 
 type DashboardKanbanContainerProps = {
+  projectsById: Record<string, ProjectDetails>;
   tasks: Task[];
 };
 
 export function DashboardKanbanContainer({
+  projectsById,
   tasks,
 }: DashboardKanbanContainerProps) {
   const tasksByStatus = groupTasksByDisplayableStatus(tasks);
@@ -51,7 +54,12 @@ export function DashboardKanbanContainer({
 
             <div className={styles.tasks}>
               {columnTasks.map((task) => (
-                <DashboardTaskCard key={task.id} task={task} variant="kanban" />
+                <DashboardTaskCard
+                  key={task.id}
+                  project={projectsById[task.projectId]}
+                  task={task}
+                  variant="kanban"
+                />
               ))}
             </div>
           </section>
