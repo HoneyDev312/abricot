@@ -71,7 +71,7 @@ export function ProfileForm({ profile }: ProfileFormProps) {
   }
 
   return (
-    <section className={styles.card}>
+    <section aria-label="Informations du compte" className={styles.card}>
       <header className={styles.header}>
         <Typography
           as="h5"

@@ -18,6 +18,7 @@ export function CreateTaskButton({
   return (
     <>
       <button
+        aria-label="Créer une tâche"
         className={className}
         onClick={() => setIsOpen(true)}
         type="button"

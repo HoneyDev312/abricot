@@ -12,6 +12,10 @@ import {
 import { Typography } from "@/shared/components/Typography";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { createTaskAction } from "@/features/tasks/services/task.actions";
+import {
+  TASK_STATUS_LABELS,
+  TASK_STATUS_OPTIONS,
+} from "@/features/tasks/services/task.helpers";
 import type { CreateTaskPayload } from "@/features/tasks/types/task.types";
 import type {
   ProjectDetails,
@@ -24,12 +28,6 @@ type CreateTaskModalProps = {
   onClose: () => void;
   project: ProjectDetails;
 };
-
-const TASK_STATUS_OPTIONS: CreateTaskPayload["status"][] = [
-  "TODO",
-  "IN_PROGRESS",
-  "DONE",
-];
 
 function getProjectAssignableUsers(project: ProjectDetails): ProjectUser[] {
   const usersById = new Map<string, ProjectUser>();
@@ -139,6 +137,7 @@ export function CreateTaskModal({
             <div className={styles.statusOptions}>
               {TASK_STATUS_OPTIONS.map((option) => (
                 <button
+                  aria-label={`Choisir le statut ${TASK_STATUS_LABELS[option]}`}
                   aria-pressed={status === option}
                   className={styles.statusButton}
                   key={option}

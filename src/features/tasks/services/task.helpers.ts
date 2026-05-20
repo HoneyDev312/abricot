@@ -5,6 +5,18 @@ export type DisplayableTaskStatus = Extract<
   "DONE" | "IN_PROGRESS" | "TODO"
 >;
 
+export const TASK_STATUS_OPTIONS: DisplayableTaskStatus[] = [
+  "TODO",
+  "IN_PROGRESS",
+  "DONE",
+];
+
+export const TASK_STATUS_LABELS: Record<DisplayableTaskStatus, string> = {
+  DONE: "Terminée",
+  IN_PROGRESS: "En cours",
+  TODO: "À faire",
+};
+
 export function formatTaskDate(dueDate?: string | null) {
   if (!dueDate) {
     return "Sans échéance";

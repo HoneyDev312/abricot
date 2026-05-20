@@ -4,11 +4,12 @@ import { useActionState, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardTaskStatus } from "@/features/tasks/components/DashboardTaskStatus";
 import { updateTaskAction } from "@/features/tasks/services/task.actions";
-import { getDisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
-import type {
-  Task,
-  UpdateTaskPayload,
-} from "@/features/tasks/types/task.types";
+import {
+  getDisplayableTaskStatus,
+  TASK_STATUS_LABELS,
+  TASK_STATUS_OPTIONS,
+} from "@/features/tasks/services/task.helpers";
+import type { Task } from "@/features/tasks/types/task.types";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { Button } from "@/shared/components/Button";
 import {
@@ -29,12 +30,6 @@ type EditTaskModalProps = {
   project: ProjectDetails;
   task: Task;
 };
-
-const TASK_STATUS_OPTIONS: Array<NonNullable<UpdateTaskPayload["status"]>> = [
-  "TODO",
-  "IN_PROGRESS",
-  "DONE",
-];
 
 function getDateInputValue(dueDate?: string | null) {
   if (!dueDate) {
@@ -69,8 +64,7 @@ export function EditTaskModal({
   const [description, setDescription] = useState(task.description ?? "");
   const [dueDate, setDueDate] = useState(initialDueDate);
   const [assigneeId, setAssigneeId] = useState("");
-  const [status, setStatus] =
-    useState<NonNullable<UpdateTaskPayload["status"]>>(initialStatus);
+  const [status, setStatus] = useState(initialStatus);
 
   const assignableUsers = useMemo(
     () => getProjectAssignableUsers(project),
@@ -171,6 +165,7 @@ export function EditTaskModal({
             <div className={styles.statusOptions}>
               {TASK_STATUS_OPTIONS.map((option) => (
                 <button
+                  aria-label={`Choisir le statut ${TASK_STATUS_LABELS[option]}`}
                   aria-pressed={status === option}
                   className={styles.statusButton}
                   key={option}
