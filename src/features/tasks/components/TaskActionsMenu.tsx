@@ -79,6 +79,14 @@ export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
           <div className={styles.menuPanel}>
             <button
               className={styles.menuItem}
+              onClick={() => setIsMenuOpen(false)}
+              type="button"
+            >
+              <Icon color="dark" name="comment" size="14px" />
+              Commenter
+            </button>
+            <button
+              className={styles.menuItem}
               disabled={!project}
               onClick={() => {
                 if (!project) {
