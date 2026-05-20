@@ -8,6 +8,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 100%;
+  text-decoration: none;
   white-space: nowrap;
   transition:
     background-color 160ms ease,
@@ -35,7 +36,8 @@
   max-width: none;
 }
 
-.button:not(:disabled):hover {
+.button:not(:disabled):hover,
+a.button:hover {
   opacity: 0.86;
 }
 

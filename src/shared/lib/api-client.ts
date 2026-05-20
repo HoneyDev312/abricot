@@ -25,7 +25,7 @@ export class ApiError extends Error {
 
 async function request<T>(
   endpoint: string,
-  { auth = true, body, headers, token, ...options }: RequestOptions = {}
+  { auth = true, body, headers, token, ...options }: RequestOptions = {},
 ): Promise<T> {
   const authToken = token ?? (auth ? await getSessionToken() : undefined);
 
@@ -49,7 +49,7 @@ async function request<T>(
     throw new ApiError(
       payload.message || "Une erreur est survenue",
       response.status,
-      payload.error
+      payload.error,
     );
   }
 
@@ -63,9 +63,8 @@ async function getSessionToken() {
     return undefined;
   }
 
-  const { getAuthToken } = await import(
-    "@/features/auth/services/session.service"
-  );
+  const { getAuthToken } =
+    await import("@/features/auth/services/session.service");
 
   return getAuthToken();
 }
