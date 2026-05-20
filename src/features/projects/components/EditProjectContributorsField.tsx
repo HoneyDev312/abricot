@@ -1,7 +1,7 @@
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { Typography } from "@/shared/components/Typography";
 import type { ProjectDetails, ProjectUser } from "../types/project.types";
-import { ProjectModalSelectField } from "./ProjectModalSelectField";
+import { ModalSelectField } from "@/shared/components/Modal";
 import styles from "./EditProjectContributorsField.module.css";
 
 type EditProjectContributorsFieldProps = {
@@ -31,7 +31,7 @@ export function EditProjectContributorsField({
 
   return (
     <>
-      <ProjectModalSelectField
+      <ModalSelectField
         id="edit-project-contributors"
         label="Contributeurs"
         name="contributors"
@@ -44,7 +44,7 @@ export function EditProjectContributorsField({
             {getDisplayName(contributor)}
           </option>
         ))}
-      </ProjectModalSelectField>
+      </ModalSelectField>
 
       {project.members.length > 0 ? (
         <div className={styles.currentContributors}>

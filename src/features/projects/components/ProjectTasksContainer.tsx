@@ -8,7 +8,7 @@ import { Typography } from "@/shared/components/Typography";
 import { filterTasksByTitle } from "@/features/tasks/services/task.helpers";
 import type { Task, TaskStatus } from "@/features/tasks/types/task.types";
 import type { ProjectDetails } from "../types/project.types";
-import { ProjectTaskCard } from "./ProjectTaskCard";
+import { ProjectTaskCard } from "../../tasks/components/ProjectTaskCard";
 import styles from "./ProjectTasksContainer.module.css";
 
 type ProjectTaskTabId = "calendar" | "list";
@@ -75,7 +75,9 @@ export function ProjectTasksContainer({
             label="Filtrer par statut"
             name="taskStatus"
             onChange={(event) =>
-              setStatusFilter(event.target.value as ProjectTaskStatusFilter | "")
+              setStatusFilter(
+                event.target.value as ProjectTaskStatusFilter | "",
+              )
             }
             value={statusFilter}
           >

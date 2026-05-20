@@ -10,8 +10,8 @@ import type { Task } from "@/features/tasks/types/task.types";
 import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
-import { DashboardTaskStatus } from "./DashboardTaskStatus";
-import { DashboardTaskDetailsModal } from "./DashboardTaskDetailsModal";
+import { DashboardTaskStatus } from "../../tasks/components/DashboardTaskStatus";
+import { DashboardTaskDetailsModal } from "../../tasks/components/DashboardTaskDetailsModal";
 import styles from "./DashboardTaskCard.module.css";
 
 type DashboardTaskCardProps = {
@@ -73,7 +73,9 @@ export function DashboardTaskCard({
       </div>
 
       <div className={styles.actions}>
-        {variant === "list" ? <DashboardTaskStatus status={taskStatus} /> : null}
+        {variant === "list" ? (
+          <DashboardTaskStatus status={taskStatus} />
+        ) : null}
         <Button
           className={styles.viewButton}
           disabled={!task}

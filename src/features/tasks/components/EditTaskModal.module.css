@@ -1,9 +1,3 @@
-.dialog {
-  width: min(100%, 580px);
-  min-height: 720px;
-  padding: var(--space-8);
-}
-
 .content {
   height: 100%;
 }

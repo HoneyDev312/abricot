@@ -1,11 +1,11 @@
 import type { InputHTMLAttributes } from "react";
-import styles from "./ProjectModalField.module.css";
+import styles from "./ModalField.module.css";
 
 type ProjectModalTextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
 };
 
-export function ProjectModalTextField({
+export function ModalTextField({
   id,
   label,
   type = "text",

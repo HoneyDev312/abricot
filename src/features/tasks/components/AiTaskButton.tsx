@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Icon } from "@/shared/components/Icons";
-import { AiTaskModal } from "./AiTaskModal";
+import { AiTaskModal } from "../../tasks/components/AiTaskModal";
 
 type AiTaskButtonProps = {
   className?: string;

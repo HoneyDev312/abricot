@@ -1,8 +1,8 @@
 import { Typography } from "@/shared/components/Typography";
 import Link from "next/link";
 import type { ProjectDetails, ProjectUser } from "../types/project.types";
-import { AiTaskButton } from "./AiTaskButton";
-import { CreateTaskButton } from "./CreateTaskButton";
+import { AiTaskButton } from "../../tasks/components/AiTaskButton";
+import { CreateTaskButton } from "../../tasks/components/CreateTaskButton";
 import { EditProjectButton } from "./EditProjectButton";
 import styles from "./ProjectDetailsHeader.module.css";
 

@@ -4,7 +4,7 @@ import {
 } from "@/features/tasks/services/task.helpers";
 import type { Task } from "@/features/tasks/types/task.types";
 import { Typography } from "@/shared/components/Typography";
-import { DashboardTaskCard } from "./DashboardTaskCard";
+import { DashboardTaskCard } from "../../tasks/components/DashboardTaskCard";
 import styles from "./DashboardKanbanContainer.module.css";
 
 const kanbanColumns = [
@@ -51,11 +51,7 @@ export function DashboardKanbanContainer({
 
             <div className={styles.tasks}>
               {columnTasks.map((task) => (
-                <DashboardTaskCard
-                  key={task.id}
-                  task={task}
-                  variant="kanban"
-                />
+                <DashboardTaskCard key={task.id} task={task} variant="kanban" />
               ))}
             </div>
           </section>

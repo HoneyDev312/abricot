@@ -1,7 +1,4 @@
 .dialog {
-  width: min(100%, 580px);
-  height: min(760px, calc(100dvh - var(--space-10)));
-  padding: var(--space-8);
   display: grid;
 }
 

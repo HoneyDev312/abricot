@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardTaskStatus } from "@/features/dashboard/components/DashboardTaskStatus";
+import { DashboardTaskStatus } from "@/features/tasks/components/DashboardTaskStatus";
 import { deleteTaskAction } from "@/features/tasks/services/task.actions";
 import {
   formatTaskDate,
@@ -16,7 +16,7 @@ import {
 } from "@/features/users/services/user.helpers";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
-import type { ProjectDetails } from "../types/project.types";
+import type { ProjectDetails } from "../../projects/types/project.types";
 import { EditTaskModal } from "./EditTaskModal";
 import styles from "./ProjectTaskCard.module.css";
 

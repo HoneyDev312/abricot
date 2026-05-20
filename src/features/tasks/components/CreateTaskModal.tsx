@@ -2,16 +2,21 @@
 
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardTaskStatus } from "@/features/dashboard/components/DashboardTaskStatus";
+import { DashboardTaskStatus } from "@/features/tasks/components/DashboardTaskStatus";
 import { Button } from "@/shared/components/Button";
-import { Modal } from "@/shared/components/Modal";
+import {
+  Modal,
+  ModalSelectField,
+  ModalTextField,
+} from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { createTaskAction } from "@/features/tasks/services/task.actions";
 import type { CreateTaskPayload } from "@/features/tasks/types/task.types";
-import type { ProjectDetails, ProjectUser } from "../types/project.types";
-import { ProjectModalSelectField } from "./ProjectModalSelectField";
-import { ProjectModalTextField } from "./ProjectModalTextField";
+import type {
+  ProjectDetails,
+  ProjectUser,
+} from "../../projects/types/project.types";
 import styles from "./CreateTaskModal.module.css";
 
 type CreateTaskModalProps = {
@@ -86,7 +91,7 @@ export function CreateTaskModal({
         </Typography>
 
         <div className={styles.fields}>
-          <ProjectModalTextField
+          <ModalTextField
             id="create-task-title"
             label="Titre*"
             name="title"
@@ -95,7 +100,7 @@ export function CreateTaskModal({
             value={title}
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id="create-task-description"
             label="Description*"
             name="description"
@@ -104,7 +109,7 @@ export function CreateTaskModal({
             value={description}
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id="create-task-due-date"
             label="Échéance*"
             name="dueDate"
@@ -114,7 +119,7 @@ export function CreateTaskModal({
             value={dueDate}
           />
 
-          <ProjectModalSelectField
+          <ModalSelectField
             id="create-task-assignee"
             label="Assigné à :"
             name="assigneeIds"
@@ -127,7 +132,7 @@ export function CreateTaskModal({
                 {getDisplayName(user)}
               </option>
             ))}
-          </ProjectModalSelectField>
+          </ModalSelectField>
 
           <fieldset className={styles.statusField}>
             <legend className={styles.statusLegend}>Statut :</legend>

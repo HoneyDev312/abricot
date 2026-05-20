@@ -3,12 +3,11 @@
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
-import { Modal } from "@/shared/components/Modal";
+import { Modal, ModalTextField } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { updateProjectAction } from "../services/project.actions";
 import type { ProjectDetails, ProjectUser } from "../types/project.types";
 import { EditProjectContributorsField } from "./EditProjectContributorsField";
-import { ProjectModalTextField } from "./ProjectModalTextField";
 import styles from "./EditProjectModal.module.css";
 
 type EditProjectModalProps = {
@@ -81,7 +80,7 @@ export function EditProjectModal({
         <input name="projectId" type="hidden" value={project.id} />
 
         <div className={styles.fields}>
-          <ProjectModalTextField
+          <ModalTextField
             id="edit-project-title"
             label="Titre*"
             name="name"
@@ -95,7 +94,7 @@ export function EditProjectModal({
             value={values.name}
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id="edit-project-description"
             label="Description*"
             name="description"

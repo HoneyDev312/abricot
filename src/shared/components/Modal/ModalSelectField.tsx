@@ -1,13 +1,12 @@
 import type { SelectHTMLAttributes } from "react";
 import { Icon } from "@/shared/components/Icons";
-import styles from "./ProjectModalField.module.css";
+import styles from "./ModalField.module.css";
 
-type ProjectModalSelectFieldProps =
-  SelectHTMLAttributes<HTMLSelectElement> & {
-    label: string;
-  };
+type ProjectModalSelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
+  label: string;
+};
 
-export function ProjectModalSelectField({
+export function ModalSelectField({
   children,
   id,
   label,

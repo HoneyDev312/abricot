@@ -3,13 +3,15 @@
 import { useActionState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
-import { Modal } from "@/shared/components/Modal";
+import {
+  Modal,
+  ModalSelectField,
+  ModalTextField,
+} from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { createProjectAction } from "../services/project.actions";
 import type { ProjectUser } from "../types/project.types";
-import { ProjectModalSelectField } from "./ProjectModalSelectField";
-import { ProjectModalTextField } from "./ProjectModalTextField";
 import styles from "./CreateProjectModal.module.css";
 
 type CreateProjectModalProps = {
@@ -25,7 +27,10 @@ export function CreateProjectModal({
 }: CreateProjectModalProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction, isPending] = useActionState(createProjectAction, {});
+  const [state, formAction, isPending] = useActionState(
+    createProjectAction,
+    {},
+  );
 
   useEffect(() => {
     if (!state.success) {
@@ -51,21 +56,21 @@ export function CreateProjectModal({
         </Typography>
 
         <div className={styles.fields}>
-          <ProjectModalTextField
+          <ModalTextField
             id="create-project-title"
             label="Titre*"
             name="name"
             required
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id="create-project-description"
             label="Description*"
             name="description"
             required
           />
 
-          <ProjectModalSelectField
+          <ModalSelectField
             id="create-project-contributors"
             label="Contributeurs"
             name="contributors"
@@ -76,7 +81,7 @@ export function CreateProjectModal({
                 {getDisplayName(contributor)}
               </option>
             ))}
-          </ProjectModalSelectField>
+          </ModalSelectField>
         </div>
 
         {state.error ? (

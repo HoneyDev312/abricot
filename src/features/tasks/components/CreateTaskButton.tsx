@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ProjectDetails } from "../types/project.types";
+import type { ProjectDetails } from "../../projects/types/project.types";
 import { CreateTaskModal } from "./CreateTaskModal";
 
 type CreateTaskButtonProps = {
@@ -9,7 +9,10 @@ type CreateTaskButtonProps = {
   project: ProjectDetails;
 };
 
-export function CreateTaskButton({ className, project }: CreateTaskButtonProps) {
+export function CreateTaskButton({
+  className,
+  project,
+}: CreateTaskButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

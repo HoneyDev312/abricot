@@ -5,7 +5,7 @@ import { filterTasksByTitle } from "@/features/tasks/services/task.helpers";
 import type { Task } from "@/features/tasks/types/task.types";
 import { SearchInput } from "@/shared/components/SearchInput";
 import { Typography } from "@/shared/components/Typography";
-import { DashboardTaskCard } from "./DashboardTaskCard";
+import { DashboardTaskCard } from "../../tasks/components/DashboardTaskCard";
 import styles from "./DashboardListContainer.module.css";
 
 type DashboardListContainerProps = {

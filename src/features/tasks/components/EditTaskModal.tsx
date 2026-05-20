@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardTaskStatus } from "@/features/dashboard/components/DashboardTaskStatus";
+import { DashboardTaskStatus } from "@/features/tasks/components/DashboardTaskStatus";
 import { updateTaskAction } from "@/features/tasks/services/task.actions";
 import { getDisplayableTaskStatus } from "@/features/tasks/services/task.helpers";
 import type {
@@ -11,11 +11,16 @@ import type {
 } from "@/features/tasks/types/task.types";
 import { getDisplayName } from "@/features/users/services/user.helpers";
 import { Button } from "@/shared/components/Button";
-import { Modal } from "@/shared/components/Modal";
+import {
+  Modal,
+  ModalSelectField,
+  ModalTextField,
+} from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
-import type { ProjectDetails, ProjectUser } from "../types/project.types";
-import { ProjectModalSelectField } from "./ProjectModalSelectField";
-import { ProjectModalTextField } from "./ProjectModalTextField";
+import type {
+  ProjectDetails,
+  ProjectUser,
+} from "../../projects/types/project.types";
 import styles from "./EditTaskModal.module.css";
 
 type EditTaskModalProps = {
@@ -117,7 +122,7 @@ export function EditTaskModal({
         </Typography>
 
         <div className={styles.fields}>
-          <ProjectModalTextField
+          <ModalTextField
             id={`edit-task-title-${task.id}`}
             label="Titre"
             name="title"
@@ -126,7 +131,7 @@ export function EditTaskModal({
             value={title}
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id={`edit-task-description-${task.id}`}
             label="Description"
             name="description"
@@ -134,7 +139,7 @@ export function EditTaskModal({
             value={description}
           />
 
-          <ProjectModalTextField
+          <ModalTextField
             id={`edit-task-due-date-${task.id}`}
             label="Échéance"
             name="dueDate"
@@ -143,7 +148,7 @@ export function EditTaskModal({
             value={dueDate}
           />
 
-          <ProjectModalSelectField
+          <ModalSelectField
             id={`edit-task-assignee-${task.id}`}
             label="Assigné à :"
             name="assigneeChoice"
@@ -159,7 +164,7 @@ export function EditTaskModal({
                 {getDisplayName(user)}
               </option>
             ))}
-          </ProjectModalSelectField>
+          </ModalSelectField>
 
           <fieldset className={styles.statusField}>
             <legend className={styles.statusLegend}>Statut :</legend>
