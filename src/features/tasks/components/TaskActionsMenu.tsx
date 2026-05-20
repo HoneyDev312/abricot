@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import type { ProjectDetails } from "@/features/projects/types/project.types";
@@ -18,6 +18,7 @@ type TaskActionsMenuProps = {
 
 export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
   const router = useRouter();
+  const menuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [deleteState, deleteAction, isDeletePending] = useActionState(
@@ -33,6 +34,24 @@ export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
     router.refresh();
   }, [deleteState.success, router]);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    function handleClickOutside(event: PointerEvent) {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   function handleDeleteSubmit(event: FormEvent<HTMLFormElement>) {
     const shouldDelete = window.confirm(
       `Supprimer définitivement la tâche "${task.title}" ?`,
@@ -45,7 +64,7 @@ export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
 
   return (
     <>
-      <div className={styles.menu}>
+      <div className={styles.menu} ref={menuRef}>
         <button
           aria-expanded={isMenuOpen}
           aria-label={`Options de la tâche ${task.title}`}
