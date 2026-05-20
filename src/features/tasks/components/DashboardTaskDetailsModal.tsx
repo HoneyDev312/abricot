@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   getDisplayName,
   getUserInitials,
@@ -29,6 +32,7 @@ export function DashboardTaskDetailsModal({
   project,
   task,
 }: DashboardTaskDetailsModalProps) {
+  const [isCommentFormOpen, setIsCommentFormOpen] = useState(false);
   const status = getDisplayableTaskStatus(task.status);
 
   return (
@@ -53,7 +57,11 @@ export function DashboardTaskDetailsModal({
             </Typography>
           </div>
 
-          <TaskActionsMenu project={project} task={task} />
+          <TaskActionsMenu
+            onComment={() => setIsCommentFormOpen(true)}
+            project={project}
+            task={task}
+          />
         </header>
 
         <div className={styles.details}>
@@ -94,7 +102,11 @@ export function DashboardTaskDetailsModal({
           </div>
         </div>
 
-        <TaskCommentsToggle task={task} />
+        <TaskCommentsToggle
+          isEditorOpen={isCommentFormOpen}
+          onEditorClose={() => setIsCommentFormOpen(false)}
+          task={task}
+        />
       </article>
     </Modal>
   );

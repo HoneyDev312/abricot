@@ -12,11 +12,16 @@ import { EditTaskModal } from "./EditTaskModal";
 import styles from "./TaskActionsMenu.module.css";
 
 type TaskActionsMenuProps = {
+  onComment?: () => void;
   project?: ProjectDetails;
   task: Task;
 };
 
-export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
+export function TaskActionsMenu({
+  onComment,
+  project,
+  task,
+}: TaskActionsMenuProps) {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,7 +84,10 @@ export function TaskActionsMenu({ project, task }: TaskActionsMenuProps) {
           <div className={styles.menuPanel}>
             <button
               className={styles.menuItem}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                onComment?.();
+                setIsMenuOpen(false);
+              }}
               type="button"
             >
               <Icon color="dark" name="comment" size="14px" />

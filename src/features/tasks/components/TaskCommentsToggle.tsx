@@ -5,12 +5,15 @@ import {
   getDisplayName,
   getUserInitials,
 } from "@/features/users/services/user.helpers";
+import { Button } from "@/shared/components/Button";
 import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import type { Task } from "../types/task.types";
 import styles from "./TaskCommentsToggle.module.css";
 
 type TaskCommentsToggleProps = {
+  isEditorOpen?: boolean;
+  onEditorClose?: () => void;
   task: Task;
 };
 
@@ -22,7 +25,11 @@ function formatCommentDate(date: string) {
   }).format(new Date(date));
 }
 
-export function TaskCommentsToggle({ task }: TaskCommentsToggleProps) {
+export function TaskCommentsToggle({
+  isEditorOpen = false,
+  onEditorClose,
+  task,
+}: TaskCommentsToggleProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,6 +55,31 @@ export function TaskCommentsToggle({ task }: TaskCommentsToggleProps) {
           />
         </button>
       </footer>
+
+      {isEditorOpen ? (
+        <form className={styles.composer}>
+          <textarea
+            className={styles.composerTextarea}
+            id={`comment-${task.id}`}
+            name="comment"
+            placeholder="Ajouter un commentaire..."
+            rows={4}
+          />
+          <div className={styles.composerActions}>
+            <Button
+              onClick={onEditorClose}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              Annuler
+            </Button>
+            <Button disabled size="sm" type="button" variant="disabled">
+              Publier
+            </Button>
+          </div>
+        </form>
+      ) : null}
 
       {isOpen ? (
         <div className={styles.comments}>
