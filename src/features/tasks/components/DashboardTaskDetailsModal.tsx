@@ -16,7 +16,7 @@ import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskStatus } from "./DashboardTaskStatus";
 import { TaskActionsMenu } from "./TaskActionsMenu";
-import { TaskCommentsToggle } from "./TaskCommentsToggle";
+import { CommentsToggle } from "../../comments/components/CommentsToggle";
 import styles from "./DashboardTaskDetailsModal.module.css";
 
 type DashboardTaskDetailsModalProps = {
@@ -102,7 +102,7 @@ export function DashboardTaskDetailsModal({
           </div>
         </div>
 
-        <TaskCommentsToggle
+        <CommentsToggle
           isEditorOpen={isCommentFormOpen}
           onEditorClose={() => setIsCommentFormOpen(false)}
           task={task}

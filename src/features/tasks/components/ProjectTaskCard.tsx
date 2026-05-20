@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { DashboardTaskStatus } from "@/features/tasks/components/DashboardTaskStatus";
 import {
   formatTaskDate,
@@ -12,7 +15,7 @@ import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import type { ProjectDetails } from "../../projects/types/project.types";
 import { TaskActionsMenu } from "./TaskActionsMenu";
-import { TaskCommentsToggle } from "./TaskCommentsToggle";
+import { CommentsToggle } from "../../comments/components/CommentsToggle";
 import styles from "./ProjectTaskCard.module.css";
 
 type ProjectTaskCardProps = {
@@ -21,6 +24,7 @@ type ProjectTaskCardProps = {
 };
 
 export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
+  const [isCommentEditorOpen, setIsCommentEditorOpen] = useState(false);
   const status = getDisplayableTaskStatus(task.status);
 
   return (
@@ -39,7 +43,11 @@ export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
             </Typography>
           </div>
 
-          <TaskActionsMenu project={project} task={task} />
+          <TaskActionsMenu
+            onComment={() => setIsCommentEditorOpen(true)}
+            project={project}
+            task={task}
+          />
         </header>
 
         <div className={styles.details}>
@@ -71,7 +79,11 @@ export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
         </div>
       </div>
 
-      <TaskCommentsToggle task={task} />
+      <CommentsToggle
+        isEditorOpen={isCommentEditorOpen}
+        onEditorClose={() => setIsCommentEditorOpen(false)}
+        task={task}
+      />
     </article>
   );
 }
