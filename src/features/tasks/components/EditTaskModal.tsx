@@ -77,9 +77,13 @@ export function EditTaskModal({
     assigneeId !== "" ||
     status !== initialStatus;
   const canSubmit = title.trim().length > 0 && isDirty && !isPending;
-  const selectedAssigneeIds = assigneeId
-    ? [assigneeId]
-    : task.assignees.map((assignee) => assignee.userId);
+  const selectedAssigneeIds = Array.from(
+    new Set(
+      assigneeId
+        ? [assigneeId]
+        : task.assignees.map((assignee) => assignee.userId),
+    ),
+  );
 
   useEffect(() => {
     if (!state.success) {

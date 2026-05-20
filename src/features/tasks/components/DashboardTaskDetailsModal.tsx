@@ -11,6 +11,7 @@ import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { DashboardTaskStatus } from "./DashboardTaskStatus";
+import { TaskCommentsToggle } from "./TaskCommentsToggle";
 import styles from "./DashboardTaskDetailsModal.module.css";
 
 type DashboardTaskDetailsModalProps = {
@@ -95,12 +96,7 @@ export function DashboardTaskDetailsModal({
           </div>
         </div>
 
-        <footer className={styles.footer}>
-          <Typography variant="small">
-            Commentaires ({task.comments.length})
-          </Typography>
-          <Icon color="dark" name="arrowTop" size="14px" />
-        </footer>
+        <TaskCommentsToggle task={task} />
       </article>
     </Modal>
   );

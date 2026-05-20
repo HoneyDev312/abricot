@@ -96,15 +96,6 @@
   line-height: 1;
 }
 
-.footer {
-  padding-top: var(--space-5);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  border-top: 1px solid var(--color-border-neutral);
-}
-
 @media (max-width: 720px) {
   .dialog {
     padding: var(--space-6);

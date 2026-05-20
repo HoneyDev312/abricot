@@ -18,6 +18,7 @@ import { Icon } from "@/shared/components/Icons";
 import { Typography } from "@/shared/components/Typography";
 import type { ProjectDetails } from "../../projects/types/project.types";
 import { EditTaskModal } from "./EditTaskModal";
+import { TaskCommentsToggle } from "./TaskCommentsToggle";
 import styles from "./ProjectTaskCard.module.css";
 
 type ProjectTaskCardProps = {
@@ -149,12 +150,7 @@ export function ProjectTaskCard({ project, task }: ProjectTaskCardProps) {
           </div>
         </div>
 
-        <footer className={styles.footer}>
-          <Typography variant="small">
-            Commentaires ({task.comments.length})
-          </Typography>
-          <Icon color="dark" name="arrowTop" size="14px" />
-        </footer>
+        <TaskCommentsToggle task={task} />
       </article>
 
       {isEditModalOpen ? (
