@@ -153,7 +153,7 @@ export function EditTaskModal({
             onChange={(event) => setAssigneeId(event.target.value)}
             value={assigneeId}
           >
-            <option value="">
+            <option key="current-assignees" value="">
               {task.assignees.length} collaborateur
               {task.assignees.length > 1 ? "s" : ""}
             </option>
