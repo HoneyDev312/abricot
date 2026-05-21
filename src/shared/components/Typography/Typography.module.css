@@ -1,5 +1,6 @@
 .typography {
   font-family: var(--font-main);
+  background-color: inherit;
 }
 
 .h1 {

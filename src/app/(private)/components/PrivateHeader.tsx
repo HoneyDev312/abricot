@@ -65,12 +65,7 @@ export function PrivateHeader({ userInitials }: PrivateHeaderProps) {
                   name={link.icon}
                   size="24px"
                 />
-                <Typography
-                  variant="navLink"
-                  color={isActive ? "light" : "brand"}
-                >
-                  {link.label}
-                </Typography>
+                <Typography variant="navLink">{link.label}</Typography>
               </NextLink>
             );
           })}
