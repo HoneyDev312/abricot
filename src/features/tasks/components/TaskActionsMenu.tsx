@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
 import { canEditProjectTask } from "@/features/projects/services/project.permissions";
 import type { ProjectDetails } from "@/features/projects/types/project.types";
@@ -59,7 +59,7 @@ export function TaskActionsMenu({
     };
   }, [isMenuOpen]);
 
-  function handleDeleteSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleDeleteSubmit(event: SubmitEvent<HTMLFormElement>) {
     const shouldDelete = window.confirm(
       `Supprimer définitivement la tâche "${task.title}" ?`,
     );
