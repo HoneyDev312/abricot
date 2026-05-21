@@ -25,11 +25,3 @@
   min-width: 0;
   background: var(--color-background-main);
 }
-
-@media (max-width: 720px) {
-  .footer {
-    padding: var(--space-4);
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}

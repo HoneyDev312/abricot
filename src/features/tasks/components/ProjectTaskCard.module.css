@@ -76,13 +76,3 @@
   font-size: var(--text-xs);
   line-height: 1;
 }
-
-@media (max-width: 720px) {
-  .card {
-    padding: var(--space-5);
-  }
-
-  .header {
-    display: grid;
-  }
-}

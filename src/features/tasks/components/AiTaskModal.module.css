@@ -87,10 +87,3 @@
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 3px;
 }
-
-@media (max-width: 720px) {
-  .dialog {
-    height: min(620px, calc(100dvh - var(--space-8)));
-    padding: var(--space-6);
-  }
-}

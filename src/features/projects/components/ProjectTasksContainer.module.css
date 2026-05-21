@@ -26,6 +26,11 @@
   gap: var(--space-3);
 }
 
+.filter {
+  display: flex;
+  gap: var(--space-3);
+}
+
 .search {
   width: 300px;
 }
@@ -48,22 +53,7 @@
 }
 
 @media (max-width: 1024px) {
-  .header,
   .controls {
     display: grid;
-  }
-
-  .controls,
-  .search {
-    width: 100%;
-  }
-}
-
-@media (max-width: 720px) {
-  .container {
-    width: calc(100% - var(--space-4) * 2);
-    min-height: 480px;
-    margin: 0 var(--space-4) var(--space-6);
-    padding: var(--space-5);
   }
 }

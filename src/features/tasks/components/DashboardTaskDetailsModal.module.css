@@ -77,13 +77,3 @@
   font-size: var(--text-xs);
   line-height: 1;
 }
-
-@media (max-width: 720px) {
-  .dialog {
-    padding: var(--space-6);
-  }
-
-  .header {
-    display: grid;
-  }
-}

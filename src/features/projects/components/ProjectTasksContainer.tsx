@@ -68,33 +68,34 @@ export function ProjectTasksContainer({
             items={projectTaskTabs}
             onChange={setActiveTab}
           />
+          <div className={styles.filter}>
+            <SelectFilter
+              className={styles.status}
+              id="project-task-status"
+              label="Filtrer par statut"
+              name="taskStatus"
+              onChange={(event) =>
+                setStatusFilter(
+                  event.target.value as ProjectTaskStatusFilter | "",
+                )
+              }
+              value={statusFilter}
+            >
+              <option value="">Statut</option>
+              <option value="TODO">À faire</option>
+              <option value="IN_PROGRESS">En cours</option>
+              <option value="DONE">Terminée</option>
+            </SelectFilter>
 
-          <SelectFilter
-            className={styles.status}
-            id="project-task-status"
-            label="Filtrer par statut"
-            name="taskStatus"
-            onChange={(event) =>
-              setStatusFilter(
-                event.target.value as ProjectTaskStatusFilter | "",
-              )
-            }
-            value={statusFilter}
-          >
-            <option value="">Statut</option>
-            <option value="TODO">À faire</option>
-            <option value="IN_PROGRESS">En cours</option>
-            <option value="DONE">Terminée</option>
-          </SelectFilter>
-
-          <SearchInput
-            className={styles.search}
-            id="project-task-search"
-            label="Rechercher une tâche"
-            name="taskSearch"
-            onChange={(event) => setSearch(event.target.value)}
-            value={search}
-          />
+            <SearchInput
+              className={styles.search}
+              id="project-task-search"
+              label="Rechercher une tâche"
+              name="taskSearch"
+              onChange={(event) => setSearch(event.target.value)}
+              value={search}
+            />
+          </div>
         </div>
       </header>
 

@@ -34,7 +34,10 @@ export default async function DashboardPage() {
         title="Tableau de bord"
       />
 
-      <DashboardTabs assignedTasks={assignedTasks} projectsById={projectsById} />
+      <DashboardTabs
+        assignedTasks={assignedTasks}
+        projectsById={projectsById}
+      />
     </main>
   );
 }

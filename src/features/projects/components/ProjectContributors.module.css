@@ -79,17 +79,3 @@
   background: var(--color-background-neutral);
   color: var(--color-text-secondary);
 }
-
-@media (max-width: 720px) {
-  .contributors {
-    width: calc(100% - var(--space-4) * 2);
-    min-height: auto;
-    margin: 0 var(--space-4) var(--space-6);
-    padding: var(--space-4);
-    display: grid;
-  }
-
-  .people {
-    justify-content: flex-start;
-  }
-}

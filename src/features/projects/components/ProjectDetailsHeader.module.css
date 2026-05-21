@@ -97,22 +97,3 @@
   background: var(--color-brand-primary);
   color: var(--color-text-light);
 }
-
-@media (max-width: 720px) {
-  .header {
-    padding: 0 var(--space-4);
-    display: grid;
-  }
-
-  .left {
-    width: 100%;
-  }
-
-  .actions {
-    width: 100%;
-  }
-
-  .createTaskButton {
-    flex: 1;
-  }
-}

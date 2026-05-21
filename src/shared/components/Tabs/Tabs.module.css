@@ -29,9 +29,3 @@
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 3px;
 }
-
-@media (max-width: 720px) {
-  .tabs {
-    flex-wrap: wrap;
-  }
-}

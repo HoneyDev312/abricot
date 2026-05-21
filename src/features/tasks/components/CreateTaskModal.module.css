@@ -75,9 +75,8 @@
   margin-top: calc(var(--space-5) * -1);
 }
 
-@media (max-width: 720px) {
-  .dialog {
-    min-height: 620px;
-    padding: var(--space-6);
+@media (max-width: 1024px) {
+  .form {
+    gap: var(--space-6);
   }
 }

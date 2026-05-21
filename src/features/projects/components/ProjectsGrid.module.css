@@ -23,16 +23,3 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
-@media (max-width: 720px) {
-  .grid {
-    width: calc(100% - var(--space-4) * 2);
-    margin: 0 var(--space-4) var(--space-6);
-    grid-template-columns: 1fr;
-  }
-
-  .empty {
-    width: calc(100% - var(--space-4) * 2);
-    margin: 0 var(--space-4) var(--space-6);
-  }
-}

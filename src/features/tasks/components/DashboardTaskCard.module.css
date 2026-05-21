@@ -81,24 +81,3 @@
     gap: var(--space-5);
   }
 }
-
-@media (max-width: 720px) {
-  .card {
-    display: grid;
-    padding: var(--space-5);
-  }
-
-  .meta {
-    flex-wrap: wrap;
-  }
-
-  .actions {
-    min-width: 0;
-    justify-items: stretch;
-  }
-
-  .viewButton {
-    width: 100%;
-    max-width: none;
-  }
-}

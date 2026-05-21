@@ -31,18 +31,3 @@
   gap: var(--space-5);
   flex-wrap: wrap;
 }
-
-@media (max-width: 720px) {
-  .page {
-    padding: var(--space-4);
-  }
-
-  .panel {
-    padding: var(--space-6);
-  }
-
-  .actions {
-    align-items: stretch;
-    display: grid;
-  }
-}

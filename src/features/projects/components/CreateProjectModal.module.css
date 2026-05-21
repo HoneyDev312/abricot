@@ -25,10 +25,3 @@
 .requiredHint {
   margin-top: calc(var(--space-5) * -1);
 }
-
-@media (max-width: 720px) {
-  .dialog {
-    min-height: 520px;
-    padding: var(--space-6);
-  }
-}

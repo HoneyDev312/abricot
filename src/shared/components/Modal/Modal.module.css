@@ -43,14 +43,3 @@
   border-color: var(--color-border-brand);
   color: var(--color-text-brand);
 }
-
-@media (max-width: 720px) {
-  .overlay {
-    padding: var(--space-4);
-  }
-
-  .dialog {
-    min-height: 180px;
-    padding: var(--space-6);
-  }
-}

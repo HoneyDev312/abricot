@@ -16,10 +16,3 @@
   width: fit-content;
   margin-top: var(--space-2);
 }
-
-@media (max-width: 720px) {
-  .submit {
-    width: 100%;
-    max-width: none;
-  }
-}

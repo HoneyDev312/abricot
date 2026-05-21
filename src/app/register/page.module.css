@@ -37,27 +37,3 @@
     padding: var(--space-9) 0;
   }
 }
-
-@media (max-width: 900px) {
-  .page {
-    padding: 0;
-  }
-
-  .panel {
-    min-height: 100svh;
-    grid-template-columns: 1fr;
-  }
-
-  .formColumn {
-    min-height: 100svh;
-    padding: var(--space-6) var(--space-5);
-  }
-
-  .logo {
-    width: 190px;
-  }
-
-  .imageColumn {
-    display: none;
-  }
-}

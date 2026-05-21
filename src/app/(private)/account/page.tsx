@@ -8,7 +8,7 @@ export default async function AccountPage() {
   const profile = await getUserProfile();
 
   return (
-    <main>
+    <main className={styles.page}>
       <form action={logoutAction} className={styles.logout}>
         <Button size="sm" type="submit" variant="outline">
           Se déconnecter
