@@ -81,7 +81,9 @@ export function EditTaskModal({
     new Set(
       assigneeId
         ? [assigneeId]
-        : task.assignees.map((assignee) => assignee.userId),
+        : task.assignees
+            .map((assignee) => assignee.userId || assignee.user.id)
+            .filter(Boolean),
     ),
   );
 
