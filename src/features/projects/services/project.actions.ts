@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import {
   addProjectContributor,
   createProject,
+  deleteProject,
   removeProjectContributor,
   updateProject,
 } from "./project.service";
@@ -17,6 +18,10 @@ export type CreateProjectActionState = {
 export type UpdateProjectActionState = {
   error?: string;
   success?: boolean;
+};
+
+export type DeleteProjectActionState = {
+  error?: string;
 };
 
 export async function createProjectAction(
@@ -111,4 +116,34 @@ export async function updateProjectAction(
   revalidatePath(`/projects/${projectId}`);
 
   return { success: true };
+}
+
+export async function deleteProjectAction(
+  _state: DeleteProjectActionState,
+  formData: FormData,
+): Promise<DeleteProjectActionState> {
+  const projectId = String(formData.get("projectId") ?? "").trim();
+
+  if (!projectId) {
+    return {
+      error: "Impossible d'identifier le projet à supprimer",
+    };
+  }
+
+  try {
+    await deleteProject(projectId);
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Impossible de supprimer le projet pour le moment",
+    };
+  }
+
+  revalidatePath("/dashboard");
+  revalidatePath("/projects");
+  revalidatePath(`/projects/${projectId}`);
+
+  redirect("/projects");
 }

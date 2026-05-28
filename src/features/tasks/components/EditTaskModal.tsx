@@ -65,6 +65,7 @@ export function EditTaskModal({
   const [dueDate, setDueDate] = useState(initialDueDate);
   const [assigneeId, setAssigneeId] = useState("");
   const [status, setStatus] = useState(initialStatus);
+  const isContributor = project.userRole?.toUpperCase() === "CONTRIBUTOR";
 
   const assignableUsers = useMemo(
     () => getProjectAssignableUsers(project),
@@ -108,6 +109,13 @@ export function EditTaskModal({
         <input name="projectId" type="hidden" value={project.id} />
         <input name="taskId" type="hidden" value={task.id} />
         <input name="status" type="hidden" value={status} />
+        {isContributor ? (
+          <>
+            <input name="title" type="hidden" value={title} />
+            <input name="description" type="hidden" value={description} />
+            <input name="dueDate" type="hidden" value={dueDate} />
+          </>
+        ) : null}
         {selectedAssigneeIds.map((selectedAssigneeId) => (
           <input
             key={selectedAssigneeId}
@@ -118,53 +126,57 @@ export function EditTaskModal({
         ))}
 
         <Typography as="h4" className={styles.title} variant="h4">
-          Modifier
+          {isContributor ? "Modifier le statut" : "Modifier"}
         </Typography>
 
         <div className={styles.fields}>
-          <ModalTextField
-            id={`edit-task-title-${task.id}`}
-            label="Titre"
-            name="title"
-            onChange={(event) => setTitle(event.target.value)}
-            required
-            value={title}
-          />
+          {isContributor ? null : (
+            <>
+              <ModalTextField
+                id={`edit-task-title-${task.id}`}
+                label="Titre"
+                name="title"
+                onChange={(event) => setTitle(event.target.value)}
+                required
+                value={title}
+              />
 
-          <ModalTextField
-            id={`edit-task-description-${task.id}`}
-            label="Description"
-            name="description"
-            onChange={(event) => setDescription(event.target.value)}
-            value={description}
-          />
+              <ModalTextField
+                id={`edit-task-description-${task.id}`}
+                label="Description"
+                name="description"
+                onChange={(event) => setDescription(event.target.value)}
+                value={description}
+              />
 
-          <ModalTextField
-            id={`edit-task-due-date-${task.id}`}
-            label="Échéance"
-            name="dueDate"
-            onChange={(event) => setDueDate(event.target.value)}
-            type="date"
-            value={dueDate}
-          />
+              <ModalTextField
+                id={`edit-task-due-date-${task.id}`}
+                label="Échéance"
+                name="dueDate"
+                onChange={(event) => setDueDate(event.target.value)}
+                type="date"
+                value={dueDate}
+              />
 
-          <ModalSelectField
-            id={`edit-task-assignee-${task.id}`}
-            label="Assigné à :"
-            name="assigneeChoice"
-            onChange={(event) => setAssigneeId(event.target.value)}
-            value={assigneeId}
-          >
-            <option key="current-assignees" value="">
-              {task.assignees.length} collaborateur
-              {task.assignees.length > 1 ? "s" : ""}
-            </option>
-            {assignableUsers.map((user) => (
-              <option key={user.id} value={user.id}>
-                {getDisplayName(user)}
-              </option>
-            ))}
-          </ModalSelectField>
+              <ModalSelectField
+                id={`edit-task-assignee-${task.id}`}
+                label="Assigné à :"
+                name="assigneeChoice"
+                onChange={(event) => setAssigneeId(event.target.value)}
+                value={assigneeId}
+              >
+                <option key="current-assignees" value="">
+                  {task.assignees.length} collaborateur
+                  {task.assignees.length > 1 ? "s" : ""}
+                </option>
+                {assignableUsers.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {getDisplayName(user)}
+                  </option>
+                ))}
+              </ModalSelectField>
+            </>
+          )}
 
           <fieldset className={styles.statusField}>
             <legend className={styles.statusLegend}>Statut :</legend>

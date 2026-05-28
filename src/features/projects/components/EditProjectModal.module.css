@@ -21,3 +21,15 @@
   margin-top: calc(var(--space-5) * -1);
   color: var(--color-text-todo);
 }
+
+.deleteForm {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.deleteButton {
+  border-color: var(--color-text-todo);
+  color: var(--color-text-todo);
+}

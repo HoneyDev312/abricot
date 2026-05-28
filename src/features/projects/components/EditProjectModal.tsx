@@ -1,11 +1,15 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useState } from "react";
+import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/Button";
 import { Modal, ModalTextField } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
-import { updateProjectAction } from "../services/project.actions";
+import {
+  deleteProjectAction,
+  updateProjectAction,
+} from "../services/project.actions";
 import type { ProjectDetails, ProjectUser } from "../types/project.types";
 import { EditProjectContributorsField } from "./EditProjectContributorsField";
 import styles from "./EditProjectModal.module.css";
@@ -40,6 +44,10 @@ export function EditProjectModal({
     updateProjectAction,
     {},
   );
+  const [deleteState, deleteAction, isDeletePending] = useActionState(
+    deleteProjectAction,
+    {},
+  );
 
   const hasChanges =
     values.name.trim() !== initialValues.name ||
@@ -62,6 +70,16 @@ export function EditProjectModal({
         ? current.filter((currentUserId) => currentUserId !== userId)
         : [...current, userId],
     );
+  }
+
+  function handleDeleteSubmit(event: SubmitEvent<HTMLFormElement>) {
+    const shouldDelete = window.confirm(
+      `Supprimer définitivement le projet "${project.name}" ?`,
+    );
+
+    if (!shouldDelete) {
+      event.preventDefault();
+    }
   }
 
   return (
@@ -131,6 +149,30 @@ export function EditProjectModal({
           variant={!hasChanges || isPending ? "disabled" : "dark"}
         >
           {isPending ? "Enregistrement..." : "Enregistrer"}
+        </Button>
+      </form>
+
+      <form
+        action={deleteAction}
+        className={styles.deleteForm}
+        onSubmit={handleDeleteSubmit}
+      >
+        <input name="projectId" type="hidden" value={project.id} />
+
+        {deleteState.error ? (
+          <Typography className={styles.error} variant="small">
+            {deleteState.error}
+          </Typography>
+        ) : null}
+
+        <Button
+          className={styles.deleteButton}
+          disabled={isDeletePending}
+          size="md"
+          type="submit"
+          variant="outline"
+        >
+          {isDeletePending ? "Suppression..." : "Supprimer le projet"}
         </Button>
       </form>
     </Modal>

@@ -5,5 +5,5 @@ export function canEditProjectTask(project?: Pick<ProjectDetails, "userRole">) {
     return false;
   }
 
-  return project.userRole.toUpperCase() === "ADMIN";
+  return ["ADMIN", "CONTRIBUTOR"].includes(project.userRole.toUpperCase());
 }

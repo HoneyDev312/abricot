@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
-import { canEditProjectTask } from "@/features/projects/services/project.permissions";
 import type { ProjectDetails } from "@/features/projects/types/project.types";
 import { deleteTaskAction } from "@/features/tasks/services/task.actions";
 import type { Task } from "@/features/tasks/types/task.types";
@@ -31,7 +30,6 @@ export function TaskActionsMenu({
     deleteTaskAction,
     {},
   );
-  const canEditTask = canEditProjectTask(project);
 
   useEffect(() => {
     if (!deleteState.success) {
@@ -97,12 +95,7 @@ export function TaskActionsMenu({
             </button>
             <button
               className={styles.menuItem}
-              disabled={!canEditTask}
               onClick={() => {
-                if (!canEditTask) {
-                  return;
-                }
-
                 setIsEditModalOpen(true);
                 setIsMenuOpen(false);
               }}
@@ -136,7 +129,7 @@ export function TaskActionsMenu({
         ) : null}
       </div>
 
-      {project && canEditTask && isEditModalOpen ? (
+      {project && isEditModalOpen ? (
         <EditTaskModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}

@@ -49,6 +49,10 @@ export async function updateProject(
   return data.project;
 }
 
+export async function deleteProject(projectId: string) {
+  await apiClient.delete<void>(`/projects/${projectId}`);
+}
+
 export async function addProjectContributor(
   projectId: string,
   payload: AddProjectContributorPayload,
