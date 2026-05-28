@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   addProjectContributor,
   createProject,
@@ -55,7 +56,7 @@ export async function createProjectAction(
   revalidatePath("/dashboard");
   revalidatePath("/projects");
 
-  return { success: true };
+  redirect("/projects");
 }
 
 export async function updateProjectAction(
