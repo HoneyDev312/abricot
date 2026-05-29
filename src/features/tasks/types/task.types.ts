@@ -55,6 +55,20 @@ export type TasksResponse = {
   tasks: Task[];
 };
 
+export type GeneratedTask = {
+  description: string | null;
+  title: string;
+};
+
+export type GenerateTasksPayload = {
+  count?: number;
+  prompt: string;
+};
+
+export type GenerateTasksResponse = {
+  tasks: GeneratedTask[];
+};
+
 export type CreateTaskPayload = {
   assigneeIds?: string[];
   description: string;

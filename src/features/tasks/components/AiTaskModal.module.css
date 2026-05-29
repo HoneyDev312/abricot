@@ -25,6 +25,28 @@
   color: var(--color-text-dark);
 }
 
+.empty {
+  margin-top: var(--space-4);
+}
+
+.results {
+  min-height: 0;
+  display: grid;
+  gap: var(--space-4);
+  overflow-y: auto;
+}
+
+.task {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-neutral);
+}
+
+.error {
+  color: var(--color-text-todo);
+}
+
 .promptForm {
   margin-top: auto;
   min-height: 48px;
@@ -77,6 +99,11 @@
   border-radius: var(--radius-rounded);
   background: var(--color-brand-primary);
   cursor: pointer;
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
 }
 
 .submitButton:hover {

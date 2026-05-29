@@ -1,8 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import type { CreateTaskPayload, UpdateTaskPayload } from "../types/task.types";
-import { createTask, deleteTask, updateTask } from "./task.service";
+import type {
+  CreateTaskPayload,
+  GeneratedTask,
+  UpdateTaskPayload,
+} from "../types/task.types";
+import { createTask, deleteTask, generateTasks, updateTask } from "./task.service";
 
 export type CreateTaskActionState = {
   error?: string;
@@ -17,6 +21,12 @@ export type UpdateTaskActionState = {
 export type DeleteTaskActionState = {
   error?: string;
   success?: boolean;
+};
+
+export type GenerateTasksActionState = {
+  error?: string;
+  success?: boolean;
+  tasks?: GeneratedTask[];
 };
 
 export async function createTaskAction(
@@ -64,6 +74,42 @@ export async function createTaskAction(
   revalidatePath(`/projects/${projectId}`);
 
   return { success: true };
+}
+
+export async function generateTasksAction(
+  _state: GenerateTasksActionState,
+  formData: FormData,
+): Promise<GenerateTasksActionState> {
+  const projectId = String(formData.get("projectId") ?? "").trim();
+  const prompt = String(formData.get("prompt") ?? "").trim();
+  const count = Number(formData.get("count") ?? 5);
+
+  if (!projectId || !prompt) {
+    return {
+      error: "Décrivez les tâches à générer",
+      success: false,
+    };
+  }
+
+  try {
+    const { tasks } = await generateTasks(projectId, {
+      count: Number.isNaN(count) ? 5 : count,
+      prompt,
+    });
+
+    return {
+      success: true,
+      tasks,
+    };
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Impossible de générer des tâches pour le moment",
+      success: false,
+    };
+  }
 }
 
 export async function updateTaskAction(

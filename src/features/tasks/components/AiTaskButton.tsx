@@ -6,9 +6,10 @@ import { AiTaskModal } from "../../tasks/components/AiTaskModal";
 
 type AiTaskButtonProps = {
   className?: string;
+  projectId: string;
 };
 
-export function AiTaskButton({ className }: AiTaskButtonProps) {
+export function AiTaskButton({ className, projectId }: AiTaskButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,7 +25,11 @@ export function AiTaskButton({ className }: AiTaskButtonProps) {
       </button>
 
       {isOpen ? (
-        <AiTaskModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <AiTaskModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          projectId={projectId}
+        />
       ) : null}
     </>
   );

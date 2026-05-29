@@ -1,16 +1,24 @@
 "use client";
 
+import { useActionState } from "react";
 import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
+import { generateTasksAction } from "../services/task.actions";
 import styles from "./AiTaskModal.module.css";
 
 type AiTaskModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  projectId: string;
 };
 
-export function AiTaskModal({ isOpen, onClose }: AiTaskModalProps) {
+export function AiTaskModal({ isOpen, onClose, projectId }: AiTaskModalProps) {
+  const [state, formAction, isPending] = useActionState(
+    generateTasksAction,
+    {},
+  );
+
   return (
     <Modal
       className={styles.dialog}
@@ -27,7 +35,34 @@ export function AiTaskModal({ isOpen, onClose }: AiTaskModalProps) {
           </Typography>
         </header>
 
-        <form className={styles.promptForm}>
+        {state.tasks?.length ? (
+          <div className={styles.results} aria-live="polite">
+            {state.tasks.map((task, index) => (
+              <article className={styles.task} key={`${task.title}-${index}`}>
+                <Typography as="h5" variant="h5">
+                  {task.title}
+                </Typography>
+                <Typography color="secondary" variant="small">
+                  {task.description || "Aucune description"}
+                </Typography>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <Typography className={styles.empty} color="secondary" variant="small">
+            Décrivez votre besoin, l&apos;IA proposera des tâches structurées.
+          </Typography>
+        )}
+
+        {state.error ? (
+          <Typography className={styles.error} variant="small">
+            {state.error}
+          </Typography>
+        ) : null}
+
+        <form action={formAction} className={styles.promptForm}>
+          <input name="projectId" type="hidden" value={projectId} />
+          <input name="count" type="hidden" value="5" />
           <label className={styles.promptLabel} htmlFor="ai-task-prompt">
             <span className={styles.hiddenLabel}>
               Décrire les tâches à ajouter
@@ -43,6 +78,7 @@ export function AiTaskModal({ isOpen, onClose }: AiTaskModalProps) {
           <button
             aria-label="Envoyer la demande à l'IA"
             className={styles.submitButton}
+            disabled={isPending}
             type="submit"
           >
             <Icon color="light" name="star" size="12px" />

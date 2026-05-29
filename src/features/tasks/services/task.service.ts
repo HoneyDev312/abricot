@@ -1,6 +1,8 @@
 import { apiClient } from "@/shared/lib/api-client";
 import type {
   CreateTaskPayload,
+  GenerateTasksPayload,
+  GenerateTasksResponse,
   Task,
   TaskResponse,
   UpdateTaskPayload,
@@ -16,6 +18,16 @@ export async function createTask(
   );
 
   return data.task;
+}
+
+export async function generateTasks(
+  projectId: string,
+  payload: GenerateTasksPayload,
+) {
+  return apiClient.post<GenerateTasksResponse>(
+    `/projects/${projectId}/tasks/generate`,
+    payload,
+  );
 }
 
 export async function updateTask(
