@@ -29,6 +29,23 @@
   margin-top: var(--space-4);
 }
 
+.loader {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-4);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-border-neutral);
+  border-top-color: var(--color-brand-primary);
+  border-radius: var(--radius-rounded);
+  animation: spin 800ms linear infinite;
+}
+
 .results {
   min-height: 0;
   display: grid;
@@ -37,10 +54,24 @@
 }
 
 .task {
+  width: 100%;
   display: grid;
   gap: var(--space-3);
-  padding-bottom: var(--space-4);
+  border: 0;
   border-bottom: 1px solid var(--color-border-neutral);
+  padding-bottom: var(--space-4);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.task:hover {
+  opacity: 0.82;
+}
+
+.task:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
 }
 
 .error {
@@ -88,6 +119,11 @@
   color: var(--color-text-secondary);
 }
 
+.promptInput:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 .submitButton {
   width: 24px;
   height: 24px;
@@ -113,4 +149,10 @@
 .submitButton:focus-visible {
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 3px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

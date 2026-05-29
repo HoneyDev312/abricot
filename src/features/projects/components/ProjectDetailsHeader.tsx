@@ -49,7 +49,7 @@ export function ProjectDetailsHeader({
           className={styles.createTaskButton}
           project={project}
         />
-        <AiTaskButton className={styles.aiButton} projectId={project.id} />
+        <AiTaskButton className={styles.aiButton} project={project} />
       </div>
     </header>
   );

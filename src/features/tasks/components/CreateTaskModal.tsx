@@ -16,7 +16,10 @@ import {
   TASK_STATUS_LABELS,
   TASK_STATUS_OPTIONS,
 } from "@/features/tasks/services/task.helpers";
-import type { CreateTaskPayload } from "@/features/tasks/types/task.types";
+import type {
+  CreateTaskPayload,
+  GeneratedTask,
+} from "@/features/tasks/types/task.types";
 import type {
   ProjectDetails,
   ProjectUser,
@@ -24,6 +27,7 @@ import type {
 import styles from "./CreateTaskModal.module.css";
 
 type CreateTaskModalProps = {
+  initialTask?: Pick<GeneratedTask, "description" | "title">;
   isOpen: boolean;
   onClose: () => void;
   project: ProjectDetails;
@@ -41,14 +45,17 @@ function getProjectAssignableUsers(project: ProjectDetails): ProjectUser[] {
 }
 
 export function CreateTaskModal({
+  initialTask,
   isOpen,
   onClose,
   project,
 }: CreateTaskModalProps) {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(createTaskAction, {});
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(initialTask?.title ?? "");
+  const [description, setDescription] = useState(
+    initialTask?.description ?? "",
+  );
   const [dueDate, setDueDate] = useState("");
   const [assigneeId, setAssigneeId] = useState("");
   const [status, setStatus] = useState<CreateTaskPayload["status"]>("TODO");

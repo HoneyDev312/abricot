@@ -5,15 +5,22 @@ import { Icon } from "@/shared/components/Icons";
 import { Modal } from "@/shared/components/Modal";
 import { Typography } from "@/shared/components/Typography";
 import { generateTasksAction } from "../services/task.actions";
+import type { GeneratedTask } from "../types/task.types";
 import styles from "./AiTaskModal.module.css";
 
 type AiTaskModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  onSelectTask: (task: GeneratedTask) => void;
   projectId: string;
 };
 
-export function AiTaskModal({ isOpen, onClose, projectId }: AiTaskModalProps) {
+export function AiTaskModal({
+  isOpen,
+  onClose,
+  onSelectTask,
+  projectId,
+}: AiTaskModalProps) {
   const [state, formAction, isPending] = useActionState(
     generateTasksAction,
     {},
@@ -35,17 +42,29 @@ export function AiTaskModal({ isOpen, onClose, projectId }: AiTaskModalProps) {
           </Typography>
         </header>
 
-        {state.tasks?.length ? (
+        {isPending ? (
+          <div aria-live="polite" className={styles.loader} role="status">
+            <span className={styles.spinner} aria-hidden="true" />
+            <Typography color="secondary" variant="small">
+              Génération des tâches...
+            </Typography>
+          </div>
+        ) : state.tasks?.length ? (
           <div className={styles.results} aria-live="polite">
             {state.tasks.map((task, index) => (
-              <article className={styles.task} key={`${task.title}-${index}`}>
+              <button
+                className={styles.task}
+                key={`${task.title}-${index}`}
+                onClick={() => onSelectTask(task)}
+                type="button"
+              >
                 <Typography as="h5" variant="h5">
                   {task.title}
                 </Typography>
                 <Typography color="secondary" variant="small">
                   {task.description || "Aucune description"}
                 </Typography>
-              </article>
+              </button>
             ))}
           </div>
         ) : (
@@ -69,6 +88,7 @@ export function AiTaskModal({ isOpen, onClose, projectId }: AiTaskModalProps) {
             </span>
             <input
               className={styles.promptInput}
+              disabled={isPending}
               id="ai-task-prompt"
               name="prompt"
               placeholder="Décrivez les tâches que vous souhaitez ajouter..."
